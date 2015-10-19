@@ -60,11 +60,14 @@ npdcPublicationApp.filter('t', () => {
 npdcPublicationApp.filter('published', () => {
   return function(published, fmt) {
     
-    if ('%Y' === fmt && (/\d{4}\-/).test(published)) {
+    if ('%Y' === fmt && (/^[0-9]{4}-/).test(published)) {
       return published.split('-')[0];
-    } else {
-      console.log(fmt, published);
+    } else if ('%Y-%m' === fmt && (/^[0-9]{4}-[0-9]{2}-/).test(published)) {
+      return published.split('-').slice(0,2).join('-');
+    } else if ('%Y-%m-%d' === fmt && (/^[0-9]{4}-[0-9]{2}-[0-9]{2}T/).test(published)) {
       return published.split('T')[0];
+    } else {
+      return '';
     }
     
   };
@@ -76,7 +79,7 @@ npdcPublicationApp.config($httpProvider => {
 });
 
 // Inject npolarApiConfig and run
-npdcPublicationApp.run(npolarApiConfig => {
+npdcPublicationApp.run((npolarApiConfig, npdcAppConfig) => {
   var autoconfig = new AutoConfig(environment);
   angular.extend(npolarApiConfig, autoconfig, { resources });
   console.debug("npolarApiConfig", npolarApiConfig);
