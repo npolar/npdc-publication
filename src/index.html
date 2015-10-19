@@ -9,29 +9,12 @@
 
 	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   <link href="/assets/npdc-common-master-latest.css" rel="stylesheet">
-
 	<script>var VERSION = '<!-- @echo VERSION -->'; console.log("npdc-publication version:", VERSION)</script>
 
 </head>
 
-<body class="np-body" layout="row" >
-  
-	<npdc-md:sidenav class="np-sidenav" sidenav="sidenav"></npdc-md:sidenav>
-	
-  <div layout="column" flex role="main">
-  
-	  <npdc:top class="np-header" top="toolbar"></npdc:top>
-  
-	  <md-content class="np-content" flex md-scroll-y>
-      
-			<div layout-padding>
-				<npdc:crumbs></npdc:crumbs>
-				<div ng-view></div>
-			</div>
-			
-		</md-content>
-	</div>
-	 
-	<script src="app.js"></script>
-</body>
+<body>
+	<npdc:app></npdc:app>
+  <script src="app.js"></script>
+</body>	
 </html>
