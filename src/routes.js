@@ -14,7 +14,7 @@ var router = function ($routeProvider, $locationProvider) {
   template: '<npdc:formula></npdc:formula>',
   controller: 'PublicationEditController'
   }).when('/', {
-  template: '<npdc:autocomplete></npdc:autocomplete><npdc:search></npdc:search>',
+  template: '<npdc-search:input></npdc-search:input><npdc:search></npdc:search>',
   controller: 'PublicationSearchController'
   });
 };
