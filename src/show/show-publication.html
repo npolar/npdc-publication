@@ -5,21 +5,10 @@
 <article flex ng-if="document" class="np-padding">
   <npdc-document:meta></npdc-document:meta>
 
-  <md-card ng-if="document.draft == 'yes'">
-    <md-card-content>
-      <code style="background-color: red;">
-        DRAFT
-      </code>
-    </md-card-content>
-  </md-card>
-
   <p><span ng-if="document.conference">Conference </span>[{{ document.publication_type }}]<span ng-if="document.state != 'published'"> ({{document.state}})</span></p>
   <p><b>{{ document.journal.name || document.journal.np_series || document.conference.name  }}</b> ({{ document.published_sort | published:document.published_helper }}) |
     <span ng-if="doi"><a title="DOI: {{ doi.title }}" ng-href="{{ doi.href }}">{{ doi.href }}</a></span></p>
 
-
-
-  <h1 class="md-display-1">{{document.title}}</h1>
   <h3 class="md-headline">
     <span ng-repeat="author in authors">
       {{ author.first_name }}&#160;{{ author.last_name }}<span ng-if="!$last">, </span>
