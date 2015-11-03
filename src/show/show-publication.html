@@ -1,8 +1,10 @@
 <div ng-if="!document">loading...</div>
-<article flex ng-if="document">
-  
-  <npdc:edit-button></npdc:edit-button>
-  
+
+<npdc:edit-button class="np-primary-control"></npdc:edit-button>
+
+<article flex ng-if="document" class="np-padding">
+  <npdc-document:meta></npdc-document:meta>
+
   <md-card ng-if="document.draft == 'yes'">
     <md-card-content>
       <code style="background-color: red;">
@@ -10,31 +12,31 @@
       </code>
     </md-card-content>
   </md-card>
-  
+
   <p><span ng-if="document.conference">Conference </span>[{{ document.publication_type }}]<span ng-if="document.state != 'published'"> ({{document.state}})</span></p>
   <p><b>{{ document.journal.name || document.journal.np_series || document.conference.name  }}</b> ({{ document.published_sort | published:document.published_helper }}) |
-  <span ng-if="doi"><a title="DOI: {{ doi.title }}" ng-href="{{ doi.href }}">{{ doi.href }}</a></span></p>
-  
+    <span ng-if="doi"><a title="DOI: {{ doi.title }}" ng-href="{{ doi.href }}">{{ doi.href }}</a></span></p>
 
-  
+
+
   <h1 class="md-display-1">{{document.title}}</h1>
   <h3 class="md-headline">
-  <span ng-repeat="author in authors">
-    {{ author.first_name }}&#160;{{ author.last_name }}<span ng-if="!$last">, </span>
-  </span>
+    <span ng-repeat="author in authors">
+      {{ author.first_name }}&#160;{{ author.last_name }}<span ng-if="!$last">, </span>
+    </span>
   </h3>
-  
-<!--  <p>* = Norwegian Polar Institue</p>-->
-  
+
+  <!--  <p>* = Norwegian Polar Institue</p>-->
+
   <md-card>
     <md-card-content>
       <h3>Abstract</h3>
       <p>{{ document.scientific_abstract }}</p>
     </md-card-content>
   </md-card>
-  
+
   <aside>
-  
+
     <md-card>
       <md-card-content>
         <!-- programme issn issbn-->
@@ -50,66 +52,66 @@
         <p>Locations: {{ document.locations | json }}</p>
       </md-card-content>
     </md-card>
-  
-  </aside>
-   
-  
-  <aside flex>
-    
-  <md-card ng-show="related">
-    
-    <md-card-content>
-      <h3>See also</h3>
-      
-      <div ng-if="related.publications.length > 0">
-        <h3>Publications</h3>
-        <ul>
-          <li ng-repeat="p in related.publications "><a ng-href="{{p.id}}">{{ p.title }}</a> {{p._score}}</li>
-        </ul>
-      </div>
-    
-      <div ng-if="related.datasets.length > 0">
-        <h3>Datasets</h3>
-        <ul><li ng-repeat="p in related.datasets "><a ng-href="https://data.npolar.no/dataset/{{p.id}}">{{ p.title }}</a> {{p._score}}</li>
-        </ul>
-      </div>
-      
-      <div ng-if="related.projects.length > 0">
-        <h3>Projects</h3>
-        <ul>
-          <li ng-repeat="p in related.projects"><a ng-href="https://data.npolar.no/project/{{p.id}}">{{ p.title }}</a> {{p._score}}</li>
-        </ul>
-      </div>
-      
-    </md-card-content>
- 
-    
-  </md-card>
-  
-  
-  </aside>
-  
-  
-  <section>
-  <md-card>     
-    <md-card-content>
-  
- 
-    
-    <pre><a ng-href="{{uri}}">{{document.title}}</a> created {{document.created | isodate }} by {{ document.created_by}}, last updated {{ document.updated | isodate }} by {{ document.updated_by}} [revision number {{ document._rev.split('-')[0] }}]</pre>
-  
-  <!--
-  URI
-  License section,,,,
-  machine readable
-  Licence (CC-image) and more information (=>d data npolar)
-  
-  -->
-    </md-card-content>
-  </md-card>
-  </section>
-  
 
-    
+  </aside>
+
+
+  <aside flex>
+
+    <md-card ng-show="related">
+
+      <md-card-content>
+        <h3>See also</h3>
+
+        <div ng-if="related.publications.length > 0">
+          <h3>Publications</h3>
+          <ul>
+            <li ng-repeat="p in related.publications "><a ng-href="{{p.id}}">{{ p.title }}</a> {{p._score}}</li>
+          </ul>
+        </div>
+
+        <div ng-if="related.datasets.length > 0">
+          <h3>Datasets</h3>
+          <ul><li ng-repeat="p in related.datasets "><a ng-href="https://data.npolar.no/dataset/{{p.id}}">{{ p.title }}</a> {{p._score}}</li>
+          </ul>
+        </div>
+
+        <div ng-if="related.projects.length > 0">
+          <h3>Projects</h3>
+          <ul>
+            <li ng-repeat="p in related.projects"><a ng-href="https://data.npolar.no/project/{{p.id}}">{{ p.title }}</a> {{p._score}}</li>
+          </ul>
+        </div>
+
+      </md-card-content>
+
+
+    </md-card>
+
+
+  </aside>
+
+
+  <section>
+    <md-card>
+      <md-card-content>
+
+
+
+    <pre><a ng-href="{{uri}}">{{document.title}}</a> created {{document.created | isodate }} by {{ document.created_by}}, last updated {{ document.updated | isodate }} by {{ document.updated_by}} [revision number {{ document._rev.split('-')[0] }}]</pre>
+
+      <!--
+      URI
+      License section,,,,
+      machine readable
+      Licence (CC-image) and more information (=>d data npolar)
+
+      -->
+    </md-card-content>
+  </md-card>
+</section>
+
+
+
 
  </article>
