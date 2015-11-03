@@ -1,6 +1,5 @@
 'use strict';
 
-let environment = require('../environment');
 let npdcCommon = require('npdc-common');
 let AutoConfig = npdcCommon.AutoConfig;
 
@@ -43,7 +42,7 @@ npdcPublicationApp.filter('isodate', function() {
   } else {
     return input;
   }
-  
+
   };
 });
 
@@ -52,14 +51,14 @@ npdcPublicationApp.filter('t', () => {
     if (txt instanceof String) {
       return 't('+txt+')';
     }
-    
+
   };
 });
 
 
 npdcPublicationApp.filter('published', () => {
   return function(published, fmt) {
-    
+
     if ('%Y' === fmt && (/^[0-9]{4}-/).test(published)) {
       return published.split('-')[0];
     } else if ('%Y-%m' === fmt && (/^[0-9]{4}-[0-9]{2}-/).test(published)) {
@@ -69,7 +68,7 @@ npdcPublicationApp.filter('published', () => {
     } else {
       return '';
     }
-    
+
   };
 });
 
@@ -80,7 +79,10 @@ npdcPublicationApp.config($httpProvider => {
 
 // Inject npolarApiConfig and run
 npdcPublicationApp.run((npolarApiConfig, npdcAppConfig) => {
+  let environment = "production";
   var autoconfig = new AutoConfig(environment);
   angular.extend(npolarApiConfig, autoconfig, { resources });
+  npdcAppConfig.cardTitle = '';
+  npdcAppConfig.toolbarTitle = "Publications";
   console.debug("npolarApiConfig", npolarApiConfig);
 });
