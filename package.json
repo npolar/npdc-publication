@@ -11,15 +11,11 @@
   "private": true,
   "repository": "https://github.com/npolar/npdc-publication",
   "dependencies": {
-    "angular": "1.4.5",
+    "angular": "1.4.7",
     "angular-npolar": "npolar/angular-npolar",
-    "angular-route": "1.4.5",
+    "angular-route": "1.4.7",
     "formula": "npolar/formula",
-    "lodash": "^3.10.0",
-    "npdc-common": "npolar/npdc-common",
-    "purecss": "^0.6.0",
-    "chronopic": "npolar/chronopic.js",
-    "tv4": "^1.1.12"
+    "npdc-common": "npolar/npdc-common"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

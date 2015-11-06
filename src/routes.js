@@ -3,7 +3,7 @@
 /**
  * @ngInject
  */
-var router = function ($routeProvider, $locationProvider) {
+var router = function($routeProvider, $locationProvider) {
 
   $locationProvider.html5Mode(true).hashPrefix('!');
 
@@ -11,11 +11,12 @@ var router = function ($routeProvider, $locationProvider) {
     templateUrl: 'show/show-publication.html',
     controller: 'PublicationShowController'
   }).when('/:id/edit', {
-  template: '<npdc:formula></npdc:formula>',
-  controller: 'PublicationEditController'
+    template: '<npdc:formula></npdc:formula>',
+    controller: 'PublicationEditController'
   }).when('/', {
-  template: '<npdc-search:input></npdc-search:input><npdc:search></npdc:search>',
-  controller: 'PublicationSearchController'
+    template: '<npdc-search:input feed="feed"></npdc-search:input><npdc:search feed="feed"></npdc:search>',
+    controller: 'PublicationSearchController',
+    reloadOnSearch: false
   });
 };
 
