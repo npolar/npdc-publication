@@ -1,0 +1,290 @@
+{
+    "fieldsets": [
+      {
+    "title": "Core",
+    "fields": [
+    {
+         "id": "publication_type",
+         "title":"publication type"
+      },
+      {
+         "id": "title",
+         "title":"publication title"
+      },
+       {
+         "id": "state",
+         "title":"progress status"
+      }
+    ]
+  },
+   {
+    "title": "Authors",
+    "fields": [
+      {
+        "id": "people",
+        "title": "Authors",
+        "fields":[
+
+          "organization",
+          "email"
+
+        ]
+      }
+    ]
+  },
+   {
+    "title": "Editors",
+    "fields": [
+      {
+        "id": "people",
+        "title": "Editors",
+        "fields":[
+         "organization",
+          "email"
+        ]
+      }
+    ]
+  },
+   {
+    "title": "Translators",
+    "fields": [
+      {
+        "id": "people",
+        "title": "translators",
+        "fields":[
+           "organization",
+          "email"
+        ]
+      }
+    ]
+  },
+   {
+    "title": "Others",
+    "fields": [
+      {
+        "id": "people",
+        "title": "others",
+        "fields":[
+        ]
+      }
+    ]
+  },
+   {
+    "title": "Publication",
+    "fields": [
+      {
+        "id": "journal",
+        "title": "",
+        "fields":[
+        {
+         "id": "name",
+         "title":"publication/journal/source"
+      },
+      {
+         "id": "np_series",
+         "title":"NP reports"
+      },
+      {
+         "id": "series",
+         "title":"book/report/PhD series"
+      },
+      {
+         "id": "series_no",
+         "title":"book/report/PhD series no"
+      }
+        ]
+      }
+    ]
+  },
+   {
+    "title": "Details",
+    "fields": [
+     "published_sort",
+    {
+         "id": "volume",
+         "title":"volume"
+      },
+      {
+         "id": "issue",
+         "title":"issue"
+      },
+      {
+         "id": "suppl",
+         "title":"supplement"
+      },
+       {
+         "id": "art_no",
+         "title":"artcle no"
+      },
+      {
+         "id": "page_count",
+         "title":"total number of pages"
+      },
+      {
+         "id": "pages",
+         "title":"OR from page to page"
+      },
+      {
+         "id": "isbn",
+         "title":"isbn"
+      },
+      {
+         "id": "issn",
+         "title":"issn"
+      },
+       {
+         "id": "publication_lang",
+         "title":"publication language",
+         "values": ["Abkhaz","Arabic", "Aragonese", "Armenian", "Assamese", "Avaric", "Azerbaijani", "Basque", "Belarusian", "Bihari",
+"Bosnian", "Breton", "Bulgarian", "Catalan, Valencian", "Chechen", "Chinese", "Chuvash", "Cornish", "Croatian", "Czech",
+"Danish", "Dutch", "Dzongkha", "English", "Estonian", "Faroese", "Finnish", "French", "Galician", "Georgian", "German",
+"Greek", "Hebrew", "Hindi", "Hungarian", "Indonesian", "Irish", "Inupiaq", "Icelandic",  "Italian", "Inuktitut", "Japanese",
+"Kalaallisut,Greenlandic", "Kashmiri","Kazakh", "Kyrgyz", "Komi", "Korean", "Luxembourgish", "Lithuanian", "Latvian", "Manx",
+"Macedonian", "Malayalam", "Marathi","Mongolian", "Nepali", "Norwegian", "Nuosu", "Occitan", "Old Bulgarian, Slavonic",
+"Oriya", "Ossetian", "Punjabi", "Persian", "Polish", "Portuguese", "Quechua", "Romansh", "Romanian, Moldavian", "Russian",
+"Sindhi", "Northern Sami","Serbian", "Scottish Gaelic","Sinhalese", "Slovak", "Slovene", "Spanish; Castilian",
+"Swedish","Tamil", "Telugu", "Tajik", "Tibetan", "Turkmen", "Turkish", "Tatar", "Uighur", "Ukrainian", "Urdu","Uzbek", "Walloon", "Welsh",
+"Western Frisian", "Yiddish", "Zhuang"]
+      },
+      {
+         "id": "comment",
+         "title":"comment",
+          "type":"textarea"
+      },
+         "programme"
+    ]
+  },
+   {
+    "title": "Summaries",
+    "fields": [
+      {
+              "id": "scientific_abstract",
+              "title":"scientific abstract",
+               "type":"textarea"
+            },
+           {
+              "id": "norw_summary",
+              "title":"norwegian summary",
+               "type":"textarea"
+            }
+    ]
+  },
+   {
+    "title": "Conferences",
+    "fields": [
+      {
+        "id": "conference",
+        "title": "Conference",
+        "fields":[
+         {
+              "id": "name",
+              "title":"conference name"
+          },
+          {
+              "id": "place",
+              "title":"location/city"
+          },
+          {
+              "id": "country",
+              "title":"country"
+          },
+          {
+              "id": "dates",
+              "title":"dates from - to"
+          }
+        ]
+      }
+    ]
+  },
+   {
+    "title": "Topics",
+    "fields": [
+      {
+        "id": "topics",
+        "title": "topics",
+        "fields":[
+        ]
+      }
+    ]
+  },
+   {
+    "title": "Locations",
+    "fields": [
+      {
+        "id": "locations",
+        "title": "Locations",
+        "fields":[
+        {
+         "id": "placename"
+         },
+         {
+         "id": "area"
+         },
+        {
+         "id": "country",
+         "hidden": true
+         },
+         {
+         "id": "hemisphere",
+         "hidden": true
+         },
+         {
+         "id": "latitude",
+         "hidden": true
+         }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Keywords",
+    "fields": [
+      {
+        "id": "tags",
+        "title": "keywords"
+      }
+    ]
+  },
+   {
+    "title": "Identifiers",
+    "fields": [
+      {
+        "id": "links",
+        "title": "identifiers",
+         "fields":[
+         {
+          "id": "rel",
+          "title": "related"
+          }
+        ]
+      }
+    ]
+  },
+   {
+    "title": "Links",
+    "fields": [
+      {
+        "id": "links",
+        "title": "links",
+         "fields":[
+         {
+          "id": "rel",
+          "title": "related"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "title": "Upload",
+    "fields": [
+      {
+        "id": "upload",
+        "title": "upload",
+         "fields":[
+        ]
+      }
+    ]
+  }
+  ]
+}

@@ -14,7 +14,7 @@ var PublicationEditController = function ($scope, $controller, $routeParams, Pub
   // Formula ($scope.formula is set by parent)
   $scope.formula = $scope.formula || {};
   $scope.formula.schema = '//api.npolar.no/schema/publication';
-  //$scope.formula.form = 'edit/formula.json';
+  $scope.formula.form = 'edit/formula.json';
   $scope.formula.template = 'material';
   
   // edit (or new) action
