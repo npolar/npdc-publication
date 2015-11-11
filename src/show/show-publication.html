@@ -1,97 +1,69 @@
-<div ng-if="!document">loading...</div>
-
+<!DOCTYPE html>
 <npdc:edit-button class="np-primary-control"></npdc:edit-button>
 
-<article flex ng-if="document" class="np-padding">
-  <npdc-document:meta></npdc-document:meta>
+<div class="np-padding">
+  <div ng-if="document" class="np-doc">
+    <npdc-document:meta></npdc-document:meta>
 
-  <p><span ng-if="document.conference">Conference </span>[{{ document.publication_type }}]<span ng-if="document.state != 'published'"> ({{document.state}})</span></p>
-  <p><b>{{ document.journal.name || document.journal.np_series || document.conference.name  }}</b> ({{ document.published_sort | published:document.published_helper }}) |
-    <span ng-if="doi"><a title="DOI: {{ doi.title }}" ng-href="{{ doi.href }}">{{ doi.href }}</a></span></p>
-
-  <h3>Authors</h3>
-  <md-divider></md-divider>
-  <h4 class="layout-padding">
-    <span ng-repeat="author in authors">
-      {{ author.first_name }}&#160;{{ author.last_name }}<span ng-if="!$last">, </span>
-    </span>
-  </h4>
-
-  <!--  <p>* = Norwegian Polar Institue</p>-->
+    <section class="np-authors">
+      <md-icon>account_circle</md-icon>
+      <span ng-repeat="author in authors" class="author">
+        {{ author.first_name }} {{ author.last_name }}{{!$last ? ', ': ''}}
+      </span>
+    </section>
 
 
-  <h3>Abstract</h3>
-  <md-divider></md-divider>
+    <section class="np-citation md-whiteframe-1dp">
+      <h4>Use the following string to cite the publication</h4>
+      <span>{{citation}}</span><br>
+      <span>DOI: <a href="doi.href">{{doi.title}}</a></span>
+    </section>
 
-  <div class="layout-padding">
-    {{ document.scientific_abstract }}
+    <section>
+      <h3>Abstract</h3>
+      <md-divider></md-divider>
+      <p marked="document.scientific_abstract"></p>
+    </section>
+
+    <h3>Details</h3>
+    <md-divider></md-divider>
+    <div class="layout-padding">
+      <!-- programme issn issbn-->
+      <p>
+        Programmes: <span ng-repeat="programme in document.programme"><a ng-href="?q=&filter-programme={{programme}}">{{ programme }}</a><span ng-if="!$last"> / </span></span>
+      </p>
+      <p>
+        Topics: <span ng-repeat="topic in document.topics"><a ng-href="?q=&filter-topics={{topic}}">{{ topic }}</a><span ng-if="!$last"> / </span></span>
+      </p>
+      <p>
+        Tags: <span ng-repeat="tag in document.tags"><a ng-href="?q=&filter-tags={{tag}}">{{ tag }}</a><span ng-if="!$last"> / </span></span>
+      </p>
+      <p>Locations: {{ document.locations | json }}</p>
+    </div>
+
+
+
+    <h3>See also</h3>
+    <md-divider></md-divider>
+
+    <div ng-if="related.publications.length > 0" class="layout-padding">
+      <h3>Publications</h3>
+      <ul>
+        <li ng-repeat="p in related.publications "><a ng-href="{{p.id}}">{{ p.title }}</a> {{p._score}}</li>
+      </ul>
+    </div>
+
+    <div ng-if="related.datasets.length > 0" class="layout-padding">
+      <h3>Datasets</h3>
+      <ul><li ng-repeat="p in related.datasets "><a ng-href="https://data.npolar.no/dataset/{{p.id}}">{{ p.title }}</a> {{p._score}}</li>
+      </ul>
+    </div>
+
+    <div ng-if="related.projects.length > 0" class="layout-padding">
+      <h3>Projects</h3>
+      <ul>
+        <li ng-repeat="p in related.projects"><a ng-href="https://data.npolar.no/project/{{p.id}}">{{ p.title }}</a> {{p._score}}</li>
+      </ul>
+    </div>
   </div>
-
-
-  <h3>Details</h3>
-  <md-divider></md-divider>
-  <div class="layout-padding">
-    <!-- programme issn issbn-->
-    <p>
-      Programmes: <span ng-repeat="programme in document.programme"><a ng-href="?q=&filter-programme={{programme}}">{{ programme }}</a><span ng-if="!$last"> / </span></span>
-    </p>
-    <p>
-      Topics: <span ng-repeat="topic in document.topics"><a ng-href="?q=&filter-topics={{topic}}">{{ topic }}</a><span ng-if="!$last"> / </span></span>
-    </p>
-    <p>
-      Tags: <span ng-repeat="tag in document.tags"><a ng-href="?q=&filter-tags={{tag}}">{{ tag }}</a><span ng-if="!$last"> / </span></span>
-    </p>
-    <p>Locations: {{ document.locations | json }}</p>
-  </div>
-
-
-
-  <h3>See also</h3>
-  <md-divider></md-divider>
-
-  <div ng-if="related.publications.length > 0" class="layout-padding">
-    <h3>Publications</h3>
-    <ul>
-      <li ng-repeat="p in related.publications "><a ng-href="{{p.id}}">{{ p.title }}</a> {{p._score}}</li>
-    </ul>
-  </div>
-
-  <div ng-if="related.datasets.length > 0" class="layout-padding">
-    <h3>Datasets</h3>
-    <ul><li ng-repeat="p in related.datasets "><a ng-href="https://data.npolar.no/dataset/{{p.id}}">{{ p.title }}</a> {{p._score}}</li>
-    </ul>
-  </div>
-
-  <div ng-if="related.projects.length > 0" class="layout-padding">
-    <h3>Projects</h3>
-    <ul>
-      <li ng-repeat="p in related.projects"><a ng-href="https://data.npolar.no/project/{{p.id}}">{{ p.title }}</a> {{p._score}}</li>
-    </ul>
-  </div>
-
-
-
-
-  <section>
-    <md-card>
-      <md-card-content>
-
-
-
-<pre><a ng-href="{{uri}}">{{document.title}}</a> created {{document.created | isodate }} by {{ document.created_by}}, last updated {{ document.updated | isodate }} by {{ document.updated_by}} [revision number {{ document._rev.split('-')[0] }}]</pre>
-
-      <!--
-      URI
-      License section,,,,
-      machine readable
-      Licence (CC-image) and more information (=>d data npolar)
-
-      -->
-      </md-card-content>
-    </md-card>
-  </section>
-
-
-
-
-</article>
+</div>

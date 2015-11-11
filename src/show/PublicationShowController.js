@@ -2,11 +2,12 @@
 /**
  * @ngInject
  */
-var PublicationShowController = function ($anchorScroll, $controller, $location, $log, $routeParams, $scope, Dataset, Project, Publication, npdcAppConfig) {
+var PublicationShowController = function ($anchorScroll, $controller, $location, $routeParams,
+  $scope, $sce, $q, $http, Dataset, Project, Publication, npdcAppConfig) {
 
   $controller('NpolarBaseController', {$scope: $scope});
-
   $scope.resource = Publication;
+  $scope.error = null;
 
   $scope.isNpolar = (author) => {
     return (author && author.email && (/npolar/).test(author.email));
@@ -23,7 +24,7 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
     let href;
     let link = links.find(link => { return /doi/i.test(link.rel);} );
 
-    if (link && link.href instanceof String) {
+    if (link && link.href) {
       if (isValidDOI(link.href)) {
         href = link.href;
       } else if (isValidDOI(link.title)) {
@@ -33,56 +34,57 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
         let title = href.replace('http://dx.doi.org/', '');
         return { href, title };
       } else {
-        $log.warn("Invalid DOI", href);
+        console.warn("Invalid DOI", href);
         //@todo Flag invalid DOI for isAuthorized('update', resource.path);
       }
     }
   };
 
+  let citation = function (publication) {
+    let authors = publication.people.reduce((memo, p) => {
+      memo += memo ? ', ' : '';
+      return memo + p.last_name + ', ' + p.first_name.substr(0, 1) + '.';
+    }, '');
+    let year = publication.published_sort.split('-')[0];
+
+    return `${authors} (${year}). ${publication.title}.
+      ${publication.journal.name} ${publication.volume}
+      ${publication.pages[0]}-${publication.pages[1]}.`;
+  };
+
   let show = function() {
-    Publication.fetch($routeParams, (publication) => {
-
-      $scope.document = publication;
-
+    $scope.show().$promise.then(publication => {
+      npdcAppConfig.cardTitle = publication.title;
       $scope.uri = publication.id;
-
       $scope.authors = publication.people.filter(p => (p.roles.includes('author') || p.roles.includes('co-author')) );
+      $scope.citation = citation(publication);
 
       if (publication.links instanceof Array) {
         $scope.links = publication.links.filter(l => (l.rel !== "alternate" && l.rel !== "edit" && l.rel !== "data"));
-
         $scope.doi = extractDOILink(publication.links);
-
-
         $scope.alternate = publication.links.filter(l => ( ( l.rel === "alternate" && l.type !== "text/html") || l.rel === "edit" ));
       }
 
       let relatedQuery = { q: publication.title, fields: 'id,title', score: true, limit: 5 };
-      $scope.related = {};
 
-      Publication.array(Object.assign(relatedQuery, {'not-id': publication.id }), related => {
-        $scope.related.publications = related.filter(r => r._score > 0.4);
+      let relatedPublications = Publication.array(Object.assign({}, relatedQuery, {'not-id': publication.id })).$promise;
+
+      let relatedDatasets = Dataset.array(relatedQuery).$promise;
+
+      let relatedProjects = Project.array(relatedQuery).$promise;
+
+      $q.all([relatedDatasets, relatedPublications, relatedProjects]).then((related) => {
+        $scope.related = related.reduce((a, b) => a.concat(b), []).sort((a, b) => b._score - a._score);
       });
 
-      Dataset.array(relatedQuery, related => {
-        $scope.related.datasets = related.filter(r => r._score > 0.2);
-      });
-
-      Project.array(relatedQuery, related => {
-        $scope.related.projects = related.filter(r => r._score > 0.2);
-      });
-
-      $log.debug("publication", publication);
-
+    }, (errorData) => {
+      $scope.error = errorData.statusText;
     });
 
   };
 
   show();
 
-  $scope.show().$promise.then(function(data) {
-    npdcAppConfig.cardTitle = data.title;
-  });
 };
 
 module.exports = PublicationShowController;
