@@ -25,45 +25,25 @@
       <p marked="document.scientific_abstract"></p>
     </section>
 
-    <h3>Details</h3>
-    <md-divider></md-divider>
-    <div class="layout-padding">
-      <!-- programme issn issbn-->
-      <p>
-        Programmes: <span ng-repeat="programme in document.programme"><a ng-href="?q=&filter-programme={{programme}}">{{ programme }}</a><span ng-if="!$last"> / </span></span>
-      </p>
-      <p>
-        Topics: <span ng-repeat="topic in document.topics"><a ng-href="?q=&filter-topics={{topic}}">{{ topic }}</a><span ng-if="!$last"> / </span></span>
-      </p>
-      <p>
-        Tags: <span ng-repeat="tag in document.tags"><a ng-href="?q=&filter-tags={{tag}}">{{ tag }}</a><span ng-if="!$last"> / </span></span>
-      </p>
-      <p>Locations: {{ document.locations | json }}</p>
-    </div>
+    <section>
+      <h3>Details</h3>
+      <md-divider></md-divider>
+      <div class="layout-padding">
+        <!-- programme issn issbn-->
+        <p ng-if="document.programme">
+          Programmes: <span ng-repeat="programme in document.programme"><a ng-href="?q=&filter-programme={{programme}}">{{ programme }}</a><span ng-if="!$last"> / </span></span>
+        </p>
+        <p ng-if="document.topics">
+          Topics: <span ng-repeat="topic in document.topics"><a ng-href="?q=&filter-topics={{topic}}">{{ topic }}</a><span ng-if="!$last"> / </span></span>
+        </p>
+        <p ng-if="document.tags">
+          Tags: <span ng-repeat="tag in document.tags"><a ng-href="?q=&filter-tags={{tag}}">{{ tag }}</a><span ng-if="!$last"> / </span></span>
+        </p>
+        <p ng-if="document.locations">Locations: {{ document.locations | json }}</p>
+      </div>
+    </section>
 
+    <npdc:links links="links" related="related"></npdc:links>
 
-
-    <h3>See also</h3>
-    <md-divider></md-divider>
-
-    <div ng-if="related.publications.length > 0" class="layout-padding">
-      <h3>Publications</h3>
-      <ul>
-        <li ng-repeat="p in related.publications "><a ng-href="{{p.id}}">{{ p.title }}</a> {{p._score}}</li>
-      </ul>
-    </div>
-
-    <div ng-if="related.datasets.length > 0" class="layout-padding">
-      <h3>Datasets</h3>
-      <ul><li ng-repeat="p in related.datasets "><a ng-href="https://data.npolar.no/dataset/{{p.id}}">{{ p.title }}</a> {{p._score}}</li>
-      </ul>
-    </div>
-
-    <div ng-if="related.projects.length > 0" class="layout-padding">
-      <h3>Projects</h3>
-      <ul>
-        <li ng-repeat="p in related.projects"><a ng-href="https://data.npolar.no/project/{{p.id}}">{{ p.title }}</a> {{p._score}}</li>
-      </ul>
-    </div>
   </div>
 </div>

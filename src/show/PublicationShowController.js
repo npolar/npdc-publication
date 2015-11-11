@@ -69,7 +69,7 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
         $scope.alternate = publication.links.filter(l => ( ( l.rel === "alternate" && l.type !== "text/html") || l.rel === "edit" ));
       }
 
-      let relatedQuery = { q: publication.title, fields: 'id,title', score: true, limit: 5 };
+      let relatedQuery = { q: publication.title, fields: 'id,title,collection', score: true, limit: 5 };
 
       let relatedPublications = Publication.array(Object.assign({}, relatedQuery, {'not-id': publication.id })).$promise;
 
