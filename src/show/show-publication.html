@@ -6,9 +6,9 @@
     <npdc-document:meta></npdc-document:meta>
 
     <section class="np-authors">
-      <md-icon>account_circle</md-icon>
-      <span ng-repeat="author in authors" class="author">
-        {{ author.first_name }} {{ author.last_name }}{{!$last ? ', ': ''}}
+      <span class="author">
+        <md-icon>account_circle</md-icon>
+        {{ fullnames(authors) }}
       </span>
     </section>
 

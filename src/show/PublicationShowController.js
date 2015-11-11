@@ -13,6 +13,10 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
     return (author && author.email && (/npolar/).test(author.email));
   };
 
+  $scope.fullnames = function (authors) {
+    return authors.reduce((m, a, i) => m + a.first_name + ' ' + a.last_name + (i < authors.length-1 ? ', ':''), '');
+  };
+
   let isValidDOI = (doi) => {
     let doiRegex = /^(http\:\/\/dx\.doi\.org\/|doi:)?10\.[0-9]+\//;
     return doiRegex.test(doi);
