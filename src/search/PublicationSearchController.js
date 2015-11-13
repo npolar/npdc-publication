@@ -8,7 +8,7 @@ var PublicationSearchController = function ($scope, $location, $controller, Publ
   $scope.resource = Publication;
 
   let query = function() {
-    let defaults = { limit: 50, sort: "-published_sort,-updated", fields: 'title,id,updated,publication_type,published_sort', facets: "publication_type,state,topics", score: true };
+    let defaults = { limit: 50, sort: "-published_sort,-updated", fields: 'title,id,updated,publication_type,published_sort', facets: "publication_type,state,topics,journal,people.email", score: true };
     let invariants = $scope.security.isAuthenticated() ? {} : { "not-draft": "yes" } ;
     return Object.assign({}, defaults, $location.search(), invariants);
   };
