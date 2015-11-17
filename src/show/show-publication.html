@@ -4,20 +4,14 @@
 
 <div class="np-padding">
   <div ng-if="document" class="np-doc">
-    <npdc-document:meta></npdc-document:meta>
-
-    <section class="np-authors">
-      <span class="author">
-        <md-icon>account_circle</md-icon>
-        {{ fullnames(authors) }}
-      </span>
-    </section>
+    <npdc:document-meta></npdc:document-meta>
+    <npdc:authors authors="authors"></npdc:authors>
 
 
-    <section class="np-citation md-whiteframe-1dp">
+    <section ng-if="citation" class="np-citation md-whiteframe-1dp">
       <h4>Use the following string to cite the publication</h4>
       <span>{{citation}}</span><br>
-      <span>DOI: <a href="doi.href">{{doi.title}}</a></span>
+      <span ng-if="doi">DOI: <a href="doi.href">{{doi.title}}</a></span>
     </section>
 
     <section>
@@ -40,7 +34,7 @@
         <p ng-if="document.tags">
           Tags: <span ng-repeat="tag in document.tags"><a ng-href="?q=&filter-tags={{tag}}">{{ tag }}</a><span ng-if="!$last"> / </span></span>
         </p>
-        <p ng-if="document.locations">Locations: {{ document.locations | json }}</p>
+        <p ng-if="document.locations">Locations: <span ng-repeat="loc in document.locations">{{ loc.placename || loc.area }}, {{ loc.country }}.</span></p>
       </div>
     </section>
 

@@ -13,10 +13,6 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
     return (author && author.email && (/npolar/).test(author.email));
   };
 
-  $scope.fullnames = function (authors) {
-    return authors.reduce((m, a, i) => m + a.first_name + ' ' + a.last_name + (i < authors.length-1 ? ', ':''), '');
-  };
-
   let isValidDOI = (doi) => {
     let doiRegex = /^(http\:\/\/dx\.doi\.org\/|doi:)?10\.[0-9]+\//;
     return doiRegex.test(doi);
@@ -24,7 +20,6 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
 
   // Extract valid DOI link, from link[rel=doi].(href|title)
   let extractDOILink = (links) => {
-
     let href;
     let link = links.find(link => { return /doi/i.test(link.rel);} );
 
@@ -42,6 +37,7 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
         //@todo Flag invalid DOI for isAuthorized('update', resource.path);
       }
     }
+    return null;
   };
 
   let citation = function (publication) {
@@ -50,10 +46,11 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
       return memo + p.last_name + ', ' + p.first_name.substr(0, 1) + '.';
     }, '');
     let year = publication.published_sort.split('-')[0];
-
+    let journal = publication.journal ? publication.journal.name : '';
+    let vol = publication.volume ? publication.volume : '';
+    let pages = publication.pages ? publication.pages[0] + '-' + publication.pages[1] +'.' : '';
     return `${authors} (${year}). ${publication.title}.
-      ${publication.journal.name} ${publication.volume}
-      ${publication.pages[0]}-${publication.pages[1]}.`;
+      ${journal} ${vol} ${pages}`;
   };
 
   let show = function() {
