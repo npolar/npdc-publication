@@ -4,11 +4,8 @@ let npdcCommon = require('npdc-common');
 let AutoConfig = npdcCommon.AutoConfig;
 
 var angular = require('angular');
-require('formula');
-require('angular-route');
-require('angular-npolar');
 
-var npdcPublicationApp = angular.module('npdcPublicationApp', ['ngRoute', 'formula', 'npolarApi', 'npolarUi', 'npdcUi', 'templates']);
+var npdcPublicationApp = angular.module('npdcPublicationApp', ['npdcUi']);
 
 npdcPublicationApp.controller('PublicationShowController', require('./show/PublicationShowController'));
 npdcPublicationApp.controller('PublicationSearchController', require('./search/PublicationSearchController'));
