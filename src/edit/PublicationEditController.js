@@ -16,7 +16,8 @@ var PublicationEditController = function ($scope, $controller, $routeParams, Pub
   $scope.formula.schema = '//api.npolar.no/schema/publication';
   $scope.formula.form = 'edit/formula.json';
   $scope.formula.template = 'material';
-  
+  $scope.formula.language = 'edit/translation.json';
+
   // edit (or new) action
   $scope.edit();
 

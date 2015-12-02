@@ -13,60 +13,15 @@
       },
        {
          "id": "state",
-         "title":"progress status"
+         "title":"progress status",
+         "values": ["Draft/submitted","Accepted","Published"]
       }
     ]
   },
-   {
-    "title": "Authors",
+  {
+    "title": "People",
     "fields": [
-      {
-        "id": "people",
-        "title": "Authors",
-        "fields":[
-
-          "organization",
-          "email"
-
-        ]
-      }
-    ]
-  },
-   {
-    "title": "Editors",
-    "fields": [
-      {
-        "id": "people",
-        "title": "Editors",
-        "fields":[
-         "organization",
-          "email"
-        ]
-      }
-    ]
-  },
-   {
-    "title": "Translators",
-    "fields": [
-      {
-        "id": "people",
-        "title": "translators",
-        "fields":[
-           "organization",
-          "email"
-        ]
-      }
-    ]
-  },
-   {
-    "title": "Others",
-    "fields": [
-      {
-        "id": "people",
-        "title": "others",
-        "fields":[
-        ]
-      }
+      "people"
     ]
   },
    {
@@ -76,22 +31,30 @@
         "id": "journal",
         "title": "",
         "fields":[
-        {
-         "id": "name",
-         "title":"publication/journal/source"
-      },
-      {
-         "id": "np_series",
-         "title":"NP reports"
-      },
-      {
-         "id": "series",
-         "title":"book/report/PhD series"
-      },
-      {
-         "id": "series_no",
-         "title":"book/report/PhD series no"
-      }
+          {
+           "id": "name",
+           "title":"publication/journal/source"
+          },
+          {
+             "id": "np_series",
+             "title":"NP reports"
+          },
+          {
+            "id": "series",
+            "condition": "np_series == 'other'"
+          },
+          {
+             "id": "series_no",
+             "title":"book/report/PhD series no"
+          },
+          {
+             "id": "publisher.name",
+             "title":"publisher"
+          },
+          {
+             "id": "publisher.location",
+             "title":"publisher's location"
+          }
         ]
       }
     ]
@@ -99,7 +62,10 @@
    {
     "title": "Details",
     "fields": [
-     "published_sort",
+     {
+         "id": "published_sort",
+         "title":"Published date"
+      },
     {
          "id": "volume",
          "title":"volume"
@@ -112,10 +78,6 @@
          "id": "suppl",
          "title":"supplement"
       },
-       {
-         "id": "art_no",
-         "title":"artcle no"
-      },
       {
          "id": "page_count",
          "title":"total number of pages"
@@ -123,6 +85,10 @@
       {
          "id": "pages",
          "title":"OR from page to page"
+      },
+       {
+         "id": "art_no",
+         "title":"article no"
       },
       {
          "id": "isbn",
@@ -134,17 +100,7 @@
       },
        {
          "id": "publication_lang",
-         "title":"publication language",
-         "values": ["Abkhaz","Arabic", "Aragonese", "Armenian", "Assamese", "Avaric", "Azerbaijani", "Basque", "Belarusian", "Bihari",
-"Bosnian", "Breton", "Bulgarian", "Catalan, Valencian", "Chechen", "Chinese", "Chuvash", "Cornish", "Croatian", "Czech",
-"Danish", "Dutch", "Dzongkha", "English", "Estonian", "Faroese", "Finnish", "French", "Galician", "Georgian", "German",
-"Greek", "Hebrew", "Hindi", "Hungarian", "Indonesian", "Irish", "Inupiaq", "Icelandic",  "Italian", "Inuktitut", "Japanese",
-"Kalaallisut,Greenlandic", "Kashmiri","Kazakh", "Kyrgyz", "Komi", "Korean", "Luxembourgish", "Lithuanian", "Latvian", "Manx",
-"Macedonian", "Malayalam", "Marathi","Mongolian", "Nepali", "Norwegian", "Nuosu", "Occitan", "Old Bulgarian, Slavonic",
-"Oriya", "Ossetian", "Punjabi", "Persian", "Polish", "Portuguese", "Quechua", "Romansh", "Romanian, Moldavian", "Russian",
-"Sindhi", "Northern Sami","Serbian", "Scottish Gaelic","Sinhalese", "Slovak", "Slovene", "Spanish; Castilian",
-"Swedish","Tamil", "Telugu", "Tajik", "Tibetan", "Turkmen", "Turkish", "Tatar", "Uighur", "Ukrainian", "Urdu","Uzbek", "Walloon", "Welsh",
-"Western Frisian", "Yiddish", "Zhuang"]
+         "title":"publication language"
       },
       {
          "id": "comment",
@@ -252,9 +208,17 @@
         "id": "links",
         "title": "identifiers",
          "fields":[
+          {
+          "id": "href",
+          "title": "href"
+          },
          {
           "id": "rel",
           "title": "related"
+          },
+          {
+          "id": "title",
+          "title": "title"
           }
         ]
       }
