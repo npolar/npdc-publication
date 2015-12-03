@@ -18,6 +18,14 @@ var PublicationEditController = function ($scope, $controller, $routeParams, Pub
   $scope.formula.template = 'material';
   $scope.formula.language = 'edit/translation.json';
 
+  //Tap into save to set predefined values
+  var onSaveCallback = $scope.formula.onsave;
+
+  $scope.formula.onsave = function(model) {
+    console.log("got here");
+    onSaveCallback(model);
+  };
+
   // edit (or new) action
   $scope.edit();
 

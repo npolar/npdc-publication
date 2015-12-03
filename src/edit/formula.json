@@ -107,7 +107,10 @@
          "title":"comment",
           "type":"textarea"
       },
-         "programme"
+          {
+         "id": "programme",
+         "title":"programmes"
+      }
     ]
   },
    {
@@ -192,15 +195,6 @@
       }
     ]
   },
-  {
-    "title": "Keywords",
-    "fields": [
-      {
-        "id": "tags",
-        "title": "keywords"
-      }
-    ]
-  },
    {
     "title": "Identifiers",
     "fields": [
@@ -247,6 +241,19 @@
         "title": "upload",
          "fields":[
         ]
+      }
+    ]
+  },
+  {
+    "title": "Keywords & submit",
+    "fields": [
+      {
+        "id": "tags",
+        "title": "keywords"
+      },
+      {
+        "id": "draft",
+        "title": "submit form",
       }
     ]
   }

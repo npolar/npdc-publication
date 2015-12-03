@@ -41,24 +41,30 @@
 				"Other"
 			]
 		},
+		"draft": {
+			"title": "Visibility",
+			"description": "Please check your reference details, and make your entry publicly visible, if appropriate.",
+			"values": ["Final (visible)", "Draft (not visible)"
+			]
+		},
 		"publication_lang": {
 			"title": "Publication language",
 			"description": "Language of the publication",
 			"values": ["Abkhaz", "Arabic", "Aragonese", "Armenian", "Assamese", "Avaric", "Azerbaijani",
-				"Basque", "Belarusian", "Bihari", "Bosnian", "Breton", "Bulgarian", "Catalan, Valencian",
-				"Chechen", "Chinese", "Chuvash", "Cornish", "Croatian", "Czech", "Danish",
-				"Dutch", "Dzongkha", "English", "Estonian", "Faroese", "Finnish",
-				"French", "Galician", "Georgian", "German", "Greek", "Hebrew", "Hindi", "Hungarian",
-				"Indonesian", "Irish", "Inupiaq", "Icelandic", "Italian", "Inuktitut", "Japanese",
-				"Kalaallisut,Greenlandic", "Kashmiri", "Kazakh", "Kyrgyz", "Komi", "Korean", "Luxembourgish",
-				"Lithuanian", "Latvian", "Manx", "Macedonian", "Malayalam", "Marathi", "Mongolian",
-				"Nepali", "Norwegian", "Nuosu", "Occitan", "Old Bulgarian, Slavonic",
-				"Oriya", "Ossetian", "Punjabi", "Persian",
-				"Polish", "Portuguese", "Quechua", "Romansh", "Romanian, Moldavian", "Russian", "Sindhi",
-				"Northern Sami", "Serbian", "Scottish Gaelic", "Sinhalese",
-				"Slovak", "Slovene", "Spanish; Castilian", "Swedish", "Tamil", "Telugu", "Tajik",
-				"Tibetan", "Turkmen", "Turkish", "Tatar", "Uighur", "Ukrainian", "Urdu", "Uzbek", "Walloon",
-				"Welsh", "Western Frisian", "Yiddish", "Zhuang"
+					"Basque", "Belarusian", "Bihari", "Bosnian", "Breton", "Bulgarian", "Catalan, Valencian",
+					"Chechen", "Chinese", "Chuvash", "Cornish", "Croatian", "Czech", "Danish",
+					"Dutch", "Dzongkha", "English", "Estonian", "Faroese", "Finnish",
+					"French", "Galician", "Georgian", "German", "Greek", "Hebrew", "Hindi", "Hungarian",
+					"Indonesian", "Irish", "Inupiaq", "Icelandic", "Italian", "Inuktitut", "Japanese",
+					"Kalaallisut,Greenlandic", "Kashmiri", "Kazakh", "Kyrgyz", "Komi", "Korean", "Luxembourgish",
+					"Lithuanian", "Latvian", "Manx", "Macedonian", "Malayalam", "Marathi", "Mongolian",
+					"Nepali", "Norwegian", "Nuosu", "Occitan", "Old Bulgarian, Slavonic",
+					"Oriya", "Ossetian", "Punjabi", "Persian",
+					"Polish", "Portuguese", "Quechua", "Romansh", "Romanian, Moldavian", "Russian", "Sindhi",
+					"Northern Sami", "Serbian", "Scottish Gaelic", "Sinhalese",
+					"Slovak", "Slovene", "Spanish; Castilian", "Swedish", "Tamil", "Telugu", "Tajik",
+					"Tibetan", "Turkmen", "Turkish", "Tatar", "Uighur", "Ukrainian", "Urdu", "Uzbek", "Walloon",
+					"Welsh", "Western Frisian", "Yiddish", "Zhuang"
 			]
 		},
     "conference": {
