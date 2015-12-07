@@ -5,7 +5,7 @@ let AutoConfig = npdcCommon.AutoConfig;
 
 var angular = require('angular');
 
-var npdcPublicationApp = angular.module('npdcPublicationApp', ['npdcUi']);
+var npdcPublicationApp = angular.module('npdcPublicationApp', ['npdcCommon']);
 
 npdcPublicationApp.controller('PublicationShowController', require('./show/PublicationShowController'));
 npdcPublicationApp.controller('PublicationSearchController', require('./search/PublicationSearchController'));
