@@ -75,11 +75,11 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
       let relatedProjects = Project.array(relatedQuery).$promise;
 
       $q.all([relatedDatasets, relatedPublications, relatedProjects]).then((related) => {
-        $scope.related = related.reduce((a, b) => a.concat(b), []).sort((a, b) => b._score - a._score);
+        $scope.related = related;
       });
 
     }, (errorData) => {
-      $scope.error = errorData.statusText;
+      $scope._error = errorData.statusText;
     });
 
   };
