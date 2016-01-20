@@ -17,7 +17,7 @@ var PublicationSearchController = function ($scope, $location, $controller, Publ
 
   npdcAppConfig.search.local.results.detail = (e) => {
     let journal = e.journal && e.journal.name ? " in " + e.journal.name : "";
-    return "Published: " + e.published_sort.split('T')[0] + journal;
+    return "Published: " + (e.published_sort ? e.published_sort.split('T')[0] : '') + journal;
    };
 
   npdcAppConfig.cardTitle = "Publications";

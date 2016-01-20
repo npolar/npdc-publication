@@ -57,8 +57,10 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
     $scope.show().$promise.then(publication => {
       npdcAppConfig.cardTitle = publication.title;
       $scope.uri = publication.id;
-      $scope.authors = publication.people.filter(p => (p.roles.includes('author') || p.roles.includes('co-author')) );
-      $scope.citation = citation(publication);
+      if (publication.people) {
+        $scope.authors = publication.people.filter(p => (p.roles.includes('author') || p.roles.includes('co-author')) );
+        $scope.citation = citation(publication);
+      }
 
       if (publication.links instanceof Array) {
         $scope.links = publication.links.filter(l => (l.rel !== "alternate" && l.rel !== "edit" && l.rel !== "data"));

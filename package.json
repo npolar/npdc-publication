@@ -11,8 +11,8 @@
   "private": true,
   "repository": "https://github.com/npolar/npdc-publication",
   "dependencies": {
-    "angular": "1.4.7",
-    "npdc-common": "npolar/npdc-common"
+    "angular": "^1.4.8",
+    "npdc-common": "npolar/npdc-common#v2"
   },
   "devDependencies": {
     "gulp": "^3.9.0",

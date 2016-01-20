@@ -76,7 +76,7 @@ npdcPublicationApp.config($httpProvider => {
 
 // Inject npolarApiConfig and run
 npdcPublicationApp.run((npolarApiConfig, npdcAppConfig) => {
-  let environment = "production";
+  let environment;// = "test";
   var autoconfig = new AutoConfig(environment);
   angular.extend(npolarApiConfig, autoconfig, { resources });
   npdcAppConfig.cardTitle = '';
