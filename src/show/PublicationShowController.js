@@ -15,7 +15,7 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
 
   $scope.names = (people) => {
     return people.map(p => p.first_name +' '+ p.last_name);
-  }
+  };
   
   let isValidDOI = (doi) => {
     let doiRegex = /^(http\:\/\/dx\.doi\.org\/|doi:)?10\.[0-9]+\//;
