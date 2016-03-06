@@ -11,7 +11,7 @@
     <section ng-if="citation" class="np-citation md-whiteframe-1dp">
       <h4>Use the following string to cite the publication</h4>
       <span>{{citation}}</span><br>
-      <span ng-if="doi">DOI: <a href="doi.href">{{doi.title}}</a></span>
+      <span ng-if="doi">DOI: <a ng-href="{{doi.href}}">{{doi.title}}</a></span>
     </section>
 
     <section>
