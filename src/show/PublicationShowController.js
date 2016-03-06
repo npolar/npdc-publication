@@ -13,6 +13,10 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
     return (author && author.email && (/npolar/).test(author.email));
   };
 
+  $scope.names = (people) => {
+    return people.map(p => p.first_name +' '+ p.last_name);
+  }
+  
   let isValidDOI = (doi) => {
     let doiRegex = /^(http\:\/\/dx\.doi\.org\/|doi:)?10\.[0-9]+\//;
     return doiRegex.test(doi);
@@ -40,10 +44,12 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
     return null;
   };
 
+  // FIXME
   let citation = function (publication) {
     let authors = publication.people.reduce((memo, p) => {
       memo += memo ? ', ' : '';
-      return memo + p.last_name + ', ' + p.first_name.substr(0, 1) + '.';
+      let initials = (p.first_name+'').split(' ').map(l => l.substr(0,1)).join('');
+      return memo + p.last_name + ' ' + initials;
     }, '');
     let year = publication.published_sort.split('-')[0];
     let journal = publication.journal ? publication.journal.name : '';
@@ -55,11 +61,18 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
 
   let show = function() {
     $scope.show().$promise.then(publication => {
+      
       npdcAppConfig.cardTitle = publication.title;
+      
       $scope.uri = publication.id;
       if (publication.people) {
         $scope.authors = publication.people.filter(p => (p.roles.includes('author') || p.roles.includes('co-author')) );
+        $scope.editors = publication.people.filter(p => (p.roles.includes('editor')));
         $scope.citation = citation(publication);
+      }
+      
+      if (publication.organisations) {
+        $scope.publishers = publication.organisations.filter(o => (o.roles.includes('publisher'))); 
       }
 
       if (publication.links instanceof Array) {
