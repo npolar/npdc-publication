@@ -4,21 +4,40 @@
 
 <div class="np-padding">
   <div ng-if="document" class="np-doc">
-    <npdc:document-meta></npdc:document-meta>
-    <npdc:authors authors="authors"></npdc:authors>
-
-
+    
+    <span><a ng-href="./?filter-publication_type={{document.publication_type}}">{{ document.publication_type }}</a> publication</span>
+    <span ng-if="document.draft == 'yes'">{{ 'draft' | t  }}</span>
+    <!-- @todo open access logo-->
+    <!-- @todo license logo -->
+    
+    <h1 class="md-display-2">{{ document.title }}</h1>
+    
+    <h2 ng-if="document.journal.name || document.journal.np_series" class="md-display-1">{{ document.journal.name || document.journal.np_series }}
+      <span ng-if="document.volume || document.journal.series_no">{{ document.volume || document.journal.series_no}}</span><span ng-if="document.issue">({{document.issue}})</span><span ng-if="document.pages">, {{ document.pages[0]}}-{{document.pages[1]}}</span> ({{ document.published_sort.split('-')[0] }})
+    </h2>
+ 
+    <h2 ng-if="publishers" class="md-display-1">{{ publishers | json  }}</h2>   
+    <h2 ng-if="document.conference" class="md-display-1">Conference: {{ document.conference | json  }}</h2>
+    
+    <!-- if book and editor -->
+    <npdc:authors ng-if="editors.length == 0" authors="authors"></npdc:authors>
+    <h2 ng-if="editors.length" class="md-display-1">Edited by <span ng-repeat="name in names(editors)">{{name}}, </span></h2>   
+    
+    
     <section ng-if="citation" class="np-citation md-whiteframe-1dp">
-      <h4>Use the following string to cite the publication</h4>
+      <h4>Citation</h4>
       <span>{{citation}}</span><br>
-      <span ng-if="doi">DOI: <a href="doi.href">{{doi.title}}</a></span>
+      <span ng-if="doi">DOI: <a ng-href="{{doi.href}}">{{doi.title}}</a></span>
     </section>
-
-    <section>
-      <h3>Abstract</h3>
+    
+    
+    <section class="">
       <md-divider></md-divider>
       <p marked="document.scientific_abstract"></p>
     </section>
+    
+    <npdc:links links="document.links" related="related"></npdc:links>
+{{ links | json }}
 
     <section>
       <h3>Details</h3>
@@ -38,7 +57,8 @@
       </div>
     </section>
 
-    <npdc:links links="links" related="related"></npdc:links>
-
+    <!--<npdc:document-meta></npdc:document-meta>
+    -->
+    
   </div>
 </div>

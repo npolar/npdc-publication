@@ -160,9 +160,7 @@
     "fields": [
       {
         "id": "topics",
-        "title": "topics",
-        "fields":[
-        ]
+        "title": "topics"
       }
     ]
   },
@@ -172,26 +170,28 @@
       {
         "id": "locations",
         "title": "Locations",
-        "fields":[
-        {
-         "id": "placename"
-         },
-         {
-         "id": "area"
-         },
-        {
-         "id": "country",
-         "hidden": true
-         },
-         {
-         "id": "hemisphere",
-         "hidden": true
-         },
-         {
-         "id": "latitude",
-         "hidden": true
-         }
-        ]
+        "items": {
+            "fields":[
+            {
+             "id": "placename"
+             },
+             {
+             "id": "area"
+             },
+            {
+             "id": "country",
+             "hidden": true
+             },
+             {
+             "id": "hemisphere",
+             "hidden": true
+             },
+             {
+             "id": "latitude",
+             "hidden": true
+             }
+            ]
+        }
       }
     ]
   },
@@ -201,7 +201,8 @@
       {
         "id": "links",
         "title": "identifiers",
-         "fields":[
+        "items": {
+            "fields":[
           {
           "id": "href",
           "title": "href"
@@ -215,6 +216,7 @@
           "title": "title"
           }
         ]
+        }
       }
     ]
   },
@@ -224,12 +226,14 @@
       {
         "id": "links",
         "title": "links",
-         "fields":[
-         {
-          "id": "rel",
-          "title": "related"
-          }
-        ]
+        "items": {
+            "fields":[
+                {
+                    "id": "rel",
+                    "title": "related"
+                }
+            ]
+        }
       }
     ]
   },
@@ -238,9 +242,7 @@
     "fields": [
       {
         "id": "upload",
-        "title": "upload",
-         "fields":[
-        ]
+        "title": "upload"
       }
     ]
   },

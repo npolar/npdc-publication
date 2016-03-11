@@ -8,7 +8,11 @@ var PublicationSearchController = function ($scope, $location, $controller, Publ
   $scope.resource = Publication;
 
   let query = function() {
-    let defaults = { limit: 50, sort: "-published_sort,-updated", fields: 'title,id,updated,publication_type,published_sort,journal', facets: "publication_type,state,topics,journal.name,people.email", score: true };
+    let defaults = { limit: 50,
+    sort: "-published_sort,-updated",
+    fields: 'title,id,updated,publication_type,published_sort,journal',
+    facets: "publication_type,state,topics,journal.name,people.email", score: true };
+    
     let invariants = $scope.security.isAuthenticated() ? {} : { "not-draft": "yes" } ;
     return Object.assign({}, defaults, invariants);
   };
@@ -21,14 +25,14 @@ var PublicationSearchController = function ($scope, $location, $controller, Publ
    };
 
   npdcAppConfig.search.local.results.subtitle = "publication_type";
-  npdcAppConfig.search.local.filterUi = {
+  /*npdcAppConfig.search.local.filterUi = {
     'year-published_sort': {
       type: 'range'
     },
     'updated': {
       type: 'hidden'
     }
-  };
+  };*/
 
   $scope.$on('$locationChangeSuccess', (event, data) => {
     $scope.search(query());
