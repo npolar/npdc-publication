@@ -55,7 +55,6 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
 
   let show = function() {
     $scope.show().$promise.then(publication => {
-      npdcAppConfig.cardTitle = publication.title;
       $scope.uri = publication.id;
       if (publication.people) {
         $scope.authors = publication.people.filter(p => (p.roles.includes('author') || p.roles.includes('co-author')) );

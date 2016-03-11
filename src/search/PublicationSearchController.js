@@ -20,7 +20,6 @@ var PublicationSearchController = function ($scope, $location, $controller, Publ
     return "Published: " + (e.published_sort ? e.published_sort.split('T')[0] : '') + journal;
    };
 
-  npdcAppConfig.cardTitle = "Publications";
   npdcAppConfig.search.local.results.subtitle = "publication_type";
   npdcAppConfig.search.local.filterUi = {
     'year-published_sort': {
