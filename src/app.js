@@ -43,16 +43,6 @@ npdcPublicationApp.filter('isodate', function() {
   };
 });
 
-npdcPublicationApp.filter('t', () => {
-  return function(txt) {
-    if (txt instanceof String) {
-      return 't('+txt+')';
-    }
-
-  };
-});
-
-
 npdcPublicationApp.filter('published', () => {
   return function(published, fmt) {
 
@@ -70,15 +60,17 @@ npdcPublicationApp.filter('published', () => {
 });
 
 // API HTTP interceptor
-npdcPublicationApp.config($httpProvider => {
+npdcPublicationApp.config(($httpProvider, npolarApiConfig) => {
+  let environment = "production";
+  var autoconfig = new AutoConfig(environment);
+  angular.extend(npolarApiConfig, autoconfig, { resources });
+  console.debug("npolarApiConfig", npolarApiConfig);
+
   $httpProvider.interceptors.push('npolarApiInterceptor');
 });
 
 // Inject npolarApiConfig and run
-npdcPublicationApp.run((npolarApiConfig, npdcAppConfig) => {
-  let environment = "production";
-  var autoconfig = new AutoConfig(environment);
-  angular.extend(npolarApiConfig, autoconfig, { resources });
+npdcPublicationApp.run((npolarApiConfig, npdcAppConfig, NpolarTranslate) => {
   npdcAppConfig.toolbarTitle = "Publications";
-  console.debug("npolarApiConfig", npolarApiConfig);
+  NpolarTranslate.loadBundles('npdc-publication');
 });
