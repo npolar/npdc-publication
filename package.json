@@ -1,6 +1,6 @@
 {
   "name": "npdc-publication",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "",
   "main": "gulpfile.js",
   "scripts": {
@@ -26,7 +26,14 @@
   },
   "browserify": {
     "transform": [
-      ["babelify",{"presets": ["es2015"]}],
+      [
+        "babelify",
+        {
+          "presets": [
+            "es2015"
+          ]
+        }
+      ],
       "partialify",
       "browserify-ngannotate"
     ]
