@@ -6,6 +6,7 @@ let AutoConfig = npdcCommon.AutoConfig;
 var angular = require('angular');
 
 var npdcPublicationApp = angular.module('npdcPublicationApp', ['npdcCommon']);
+npdcPublicationApp.factory('Publication', require('./edit/Publication'));
 
 npdcPublicationApp.controller('PublicationShowController', require('./show/PublicationShowController'));
 npdcPublicationApp.controller('PublicationSearchController', require('./search/PublicationSearchController'));
@@ -16,7 +17,7 @@ var resources = [
   {'path': '/', 'resource': 'NpolarApi'},
   {'path': '/user', 'resource': 'User'},
   {'path': '/dataset', 'resource': 'Dataset' },
-  {'path': '/publication', 'resource': 'Publication' },
+  {'path': '/publication', 'resource': 'PublicationResource' },
   {'path': '/project', 'resource': 'Project' }
 ];
 

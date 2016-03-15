@@ -1,263 +1,152 @@
 {
-    "fieldsets": [
-      {
-    "title": "Core",
-    "fields": [
-    {
-         "id": "publication_type",
-         "title":"publication type"
-      },
-      {
-         "id": "title",
-         "title":"publication title"
-      },
-       {
-         "id": "state",
-         "title":"progress status",
-         "values": ["Draft/submitted","Accepted","Published"]
-      }
-    ]
-  },
-  {
-    "title": "People",
-    "fields": [
-      "people"
-    ]
-  },
-   {
-    "title": "Publication",
-    "fields": [
-      {
-        "id": "journal",
-        "title": "",
-        "fields":[
-          {
-           "id": "name",
-           "title":"publication/journal/source"
-          },
-          {
-             "id": "np_series",
-             "title":"NP reports"
-          },
-          {
-            "id": "series",
-            "condition": "np_series == 'other'"
-          },
-          {
-             "id": "series_no",
-             "title":"book/report/PhD series no"
-          },
-          {
-             "id": "publisher.name",
-             "title":"publisher"
-          },
-          {
-             "id": "publisher.location",
-             "title":"publisher's location"
-          }
-        ]
-      }
-    ]
-  },
-   {
-    "title": "Details",
-    "fields": [
-     {
-         "id": "published_sort",
-         "title":"Published date"
-      },
-    {
-         "id": "volume",
-         "title":"volume"
-      },
-      {
-         "id": "issue",
-         "title":"issue"
-      },
-      {
-         "id": "suppl",
-         "title":"supplement"
-      },
-      {
-         "id": "page_count",
-         "title":"total number of pages"
-      },
-      {
-         "id": "pages",
-         "title":"OR from page to page"
-      },
-       {
-         "id": "art_no",
-         "title":"article no"
-      },
-      {
-         "id": "isbn",
-         "title":"isbn"
-      },
-      {
-         "id": "issn",
-         "title":"issn"
-      },
-       {
-         "id": "publication_lang",
-         "title":"publication language"
-      },
-      {
-         "id": "comment",
-         "title":"comment",
-          "type":"textarea"
-      },
-          {
-         "id": "programme",
-         "title":"programmes"
-      }
-    ]
-  },
-   {
-    "title": "Summaries",
-    "fields": [
-      {
-              "id": "scientific_abstract",
-              "title":"scientific abstract",
-               "type":"textarea"
-            },
-           {
-              "id": "norw_summary",
-              "title":"norwegian summary",
-               "type":"textarea"
-            }
-    ]
-  },
-   {
-    "title": "Conferences",
-    "fields": [
-      {
-        "id": "conference",
-        "title": "Conference",
-        "fields":[
-         {
-              "id": "name",
-              "title":"conference name"
-          },
-          {
-              "id": "place",
-              "title":"location/city"
-          },
-          {
-              "id": "country",
-              "title":"country"
-          },
-          {
-              "id": "dates",
-              "title":"dates from - to"
-          }
-        ]
-      }
-    ]
-  },
-   {
-    "title": "Topics",
-    "fields": [
-      {
-        "id": "topics",
-        "title": "topics"
-      }
-    ]
-  },
-   {
-    "title": "Locations",
-    "fields": [
-      {
-        "id": "locations",
-        "title": "Locations",
-        "items": {
-            "fields":[
-            {
-             "id": "placename"
-             },
-             {
-             "id": "area"
-             },
-            {
-             "id": "country",
-             "hidden": true
-             },
-             {
-             "id": "hemisphere",
-             "hidden": true
-             },
-             {
-             "id": "latitude",
-             "hidden": true
-             }
-            ]
-        }
-      }
-    ]
-  },
-   {
-    "title": "Identifiers",
-    "fields": [
-      {
-        "id": "links",
-        "title": "identifiers",
-        "items": {
-            "fields":[
-          {
-          "id": "href",
-          "title": "href"
-          },
-         {
-          "id": "rel",
-          "title": "related"
-          },
-          {
-          "id": "title",
-          "title": "title"
-          }
-        ]
-        }
-      }
-    ]
-  },
-   {
-    "title": "Links",
-    "fields": [
-      {
-        "id": "links",
-        "title": "links",
-        "items": {
-            "fields":[
-                {
-                    "id": "rel",
-                    "title": "related"
-                }
-            ]
-        }
-      }
-    ]
-  },
-  {
-    "title": "Upload",
-    "fields": [
-      {
-        "id": "upload",
-        "title": "upload"
-      }
-    ]
-  },
-  {
-    "title": "Keywords & submit",
-    "fields": [
-      {
-        "id": "tags",
-        "title": "keywords"
-      },
-      {
-        "id": "draft",
-        "title": "submit form"
-      }
-    ]
-  }
-  ]
+	"fieldsets": [{
+		"title": "Publication",
+		"fields": [{
+			"id": "title",
+			"title": "publication title"
+		}, {
+			"id": "published",
+			"title": "Published year/date/time"
+		}, {
+			"id": "publication_type",
+			"title": "publication type"
+		}, {
+			"id": "license",
+			"enum": [
+				null,
+				"http://creativecommons.org/publicdomain/mark/1.0/",
+				"http://creativecommons.org/publicdomain/zero/1.0/",
+				"http://creativecommons.org/licenses/by-nc-nd/4.0/",
+				"http://creativecommons.org/licenses/by/4.0/"
+			]
+		}, {
+			"id": "abstract",
+			"title": "scientific abstract",
+			"type": "textarea"
+		}, {
+			"id": "overview",
+			"title": "summary for lay people",
+			"type": "textarea"
+		}]
+	}, {
+		"title": "Details",
+		"fields": [
+			"doi",
+			"isbn",
+			"issn",
+
+			{
+				"id": "journal",
+				"condition": "publication_type != 'book' && publication_type != 'map' && publication_type != 'poster' && publication_type != 'abstract'"
+			}, {
+				"id": "conference",
+				"condition": "publication_type == 'poster' || publication_type == 'abstract'"
+			},
+
+
+			{
+				"id": "volume",
+				"title": "volume"
+			}, {
+				"id": "issue",
+				"title": "issue"
+			}, {
+				"id": "suppl",
+				"title": "supplement"
+			}, {
+				"id": "page_count",
+				"title": "total number of pages"
+			}, {
+				"id": "pages",
+				"title": "OR from page to page"
+			}, {
+				"id": "art_no",
+				"title": "article no"
+			}, {
+				"id": "isbn",
+				"title": "isbn"
+			}, {
+				"id": "issn",
+				"title": "issn"
+			}, {
+				"id": "publication_lang",
+				"title": "publication language"
+			}, {
+				"id": "comment",
+				"title": "comment",
+				"type": "textarea"
+			}
+		]
+	}, {
+		"title": "People",
+		"fields": [{
+			"id": "people",
+			"fields": ["!id"]
+		}]
+	}, {
+		"title": "Organisations",
+		"fields": [{
+			"id": "organisations"
+		}]
+	}, {
+		"title": "Classification",
+		"fields": [{
+				"id": "topics",
+				"type": "array"
+			}, {
+				"id": "programme",
+				"title": "programmes",
+				"enum": [
+					"ICE Ecosystems",
+					"ICE Fluxes",
+					"ICE Antarctica",
+					"N-ICE",
+					"ICE",
+					"Biodiversity",
+					"Environmental pollutants",
+					"Geology and geophysics",
+					"Oceans and sea ice",
+					"Environmental management"
+				]
+			},
+			"tags", {
+				"id": "research_stations",
+				"enum": [
+					"Troll",
+					"Ny-Ålesund",
+					"Zeppelin",
+					"Bouvetøya",
+					"Svarthamaren"
+				]
+			}, {
+				"id": "locations",
+				"title": "Locations",
+				"items": {
+					"fields": [{
+						"id": "placename"
+					}, {
+						"id": "area"
+					}, {
+						"id": "country",
+						"hidden": true
+					}, {
+						"id": "hemisphere",
+						"hidden": true
+					}, {
+						"id": "latitude",
+						"hidden": true
+					}]
+				}
+			}
+
+		]
+	}, {
+		"title": "Links",
+		"fields": ["links"]
+	}, {
+		"title": "Files",
+		"fields": [{
+			"id": "files"
+		}]
+	}]
 }

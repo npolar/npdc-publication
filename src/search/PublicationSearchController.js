@@ -9,9 +9,9 @@ var PublicationSearchController = function ($scope, $location, $controller, Publ
 
   let query = function() {
     let defaults = { limit: 50,
-    sort: "-published_sort,-updated",
-    fields: 'title,id,updated,publication_type,published_sort,journal',
-    facets: "publication_type,state,topics,journal.name,people.email", score: true };
+    sort: "-published,-updated",
+    fields: 'title,id,updated,publication_type,published,journal',
+    facets: "publication_type,state,topics,journal.name,people.email,license", score: true };
     
     let invariants = $scope.security.isAuthenticated() ? {} : { "not-draft": "yes" } ;
     return Object.assign({}, defaults, invariants);
@@ -21,18 +21,15 @@ var PublicationSearchController = function ($scope, $location, $controller, Publ
 
   npdcAppConfig.search.local.results.detail = (e) => {
     let journal = e.journal && e.journal.name ? " in " + e.journal.name : "";
-    return "Published: " + (e.published_sort ? e.published_sort.split('T')[0] : '') + journal;
+    return "Published: " + (e.published ? e.published.split('T')[0] : '') + journal;
    };
 
   npdcAppConfig.search.local.results.subtitle = "publication_type";
-  /*npdcAppConfig.search.local.filterUi = {
-    'year-published_sort': {
+  npdcAppConfig.search.local.filterUi = {
+    'year-published': {
       type: 'range'
-    },
-    'updated': {
-      type: 'hidden'
     }
-  };*/
+  };
 
   $scope.$on('$locationChangeSuccess', (event, data) => {
     $scope.search(query());

@@ -51,7 +51,7 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
       let initials = (p.first_name+'').split(' ').map(l => l.substr(0,1)).join('');
       return memo + p.last_name + ' ' + initials;
     }, '');
-    let year = publication.published_sort.split('-')[0];
+    let year = publication.published.split('-')[0];
     let journal = publication.journal ? publication.journal.name : '';
     let vol = publication.volume ? publication.volume : '';
     let pages = publication.pages ? publication.pages[0] + '-' + publication.pages[1] +'.' : '';
@@ -68,12 +68,18 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
         $scope.citation = citation(publication);
       }
       
-      if (publication.organisations) {
-        $scope.publishers = publication.organisations.filter(o => (o.roles.includes('publisher'))); 
+      if (publication.organisations instanceof Array) {
+        $scope.publishers = publication.organisations; //.filter(o => o.roles.includes('publisher')); 
       }
 
       if (publication.links instanceof Array) {
-        $scope.links = publication.links.filter(l => (l.rel !== "alternate" && l.rel !== "edit" && l.rel !== "data"));
+        $scope.links = publication.links.filter(l => (l.rel !== "alternate" && l.rel !== "edit" && l.rel !== "data" && l.rel !== "attachment"));
+        
+        if ($scope.security.hasSystem($scope.resource.path)) {
+          $scope.links = publication.links.filter(l => (l.rel === "attachment")).concat($scope.links);
+        }
+        
+        $scope.attachments = publication.links.filter(l => (l.rel === "attachment"));        
         $scope.doi = extractDOILink(publication.links);
         $scope.alternate = publication.links.filter(l => ( ( l.rel === "alternate" && l.type !== "text/html") || l.rel === "edit" ));
       }

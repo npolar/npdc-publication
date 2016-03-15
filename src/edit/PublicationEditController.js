@@ -1,56 +1,63 @@
 'use strict';
 
-/**
- * @ngInject
- */
-var PublicationEditController = function ($scope, $controller, $routeParams, Publication) {
-
-  // EditController -> NpolarEditController
+function PublicationEditController($scope, $controller, $routeParams,
+  formula, formulaAutoCompleteService, fileFunnelService,
+  NpolarMessage, NpolarApiSecurity, npolarApiConfig, npdcAppConfig,
+  Publication) {
+  'ngInject';
+  
   $controller('NpolarEditController', { $scope: $scope });
-
-  // Publication -> npolarApiResource -> ngResource
   $scope.resource = Publication;
-
-  // Formula ($scope.formula is set by parent)
-  $scope.formula.schema = '//api.npolar.no/schema/publication';
-  $scope.formula.form = 'edit/formula.json';
-  $scope.formula.language = 'edit/translation.json';
-  $scope.formula.templates = [
-    {
-      match(field) {
-        if (field.id === "links_object") {
-          return field.fields.some(subField =>
-            subField.id === "rel" && ["alternate", "edit", "via"].includes(subField.value)
-          );
-        }
-      },
-      hidden: true
-    },
-    {
-      match(field) {
-        return field.id === "people_object";
-      },
+  
+  let templates = [{
+      match: "people_item",
       template: '<npdc:formula-person></npdc:formula-person>'
-    },
-    {
-      match(field) {
-        return field.id === "gcmd";
-      },
-      template: '<npdc:formula-gcmd></npdc:formula-gcmd>'
-    },
-    {
-      match(field) {
-        return field.id === "locations_object";
-      },
+    }, {
+      match: "placenames_item",
       template: '<npdc:formula-placename></npdc:formula-placename>'
     }
   ];
 
-  console.log('facets', Publication.facets());
+  // Formula ($scope.formula is set by parent)
+  $scope.formula = formula.getInstance({
+    schema: 'edit/publication-1.json', //'//api.npolar.no/schema/publication',
+    form: 'edit/formula.json',
+    //language: 'edit/translation.json',
+    templates: npdcAppConfig.formula.templates.concat(templates),
+    languages: npdcAppConfig.formula.languages
+  });
+     
+  // @todo, need to redfine ES mapping... 
+  // let autocompleteFacets = ["id", "schema", "doi", "title", "publication_lang", "published", "volume", "issue", "suppl", "art_no", "page_count", "comment", "created", "updated", "created_by", "updated_by", "_id", "_rev", "abstract.@language", "abstract.@value", "overview.@language", "overview.@value", "locations.placename", "locations.area", "locations.country", "locations.hemisphere", "journal.id", "journal.name", "journal.np_series", "journal.series", "journal.series_no", "conference.id", "conference.name", "conference.place", "conference.country", "conference.dates", "people.id", "people.first_name", "people.last_name", "people.email", "people.roles", "people.organisation", "organisations.id", "organisations.name", "organisations.location", "organisations.roles", "links.rel", "links.href", "links.hreflang", "links.title", "links.type", "files.uri", "files.filename", "files.title", "files.length", "files.type", "files.hash"]
+  // formulaAutoCompleteService.autocompleteFacets(autocompleteFacets, $scope.resource, $scope.formula);
+    
+  function initFileUpload(formula) {
 
-  // edit (or new) action
-  $scope.edit();
-
-};
+    let server = `${NpolarApiSecurity.canonicalUri($scope.resource.path)}/:id/_file`;
+    fileFunnelService.fileUploader({
+      match(field) {
+        return field.id === "files";
+      },
+      server,
+      multiple: true,
+      progress: false,
+      restricted: function () {
+        return !formula.getModel().license;
+      },
+      fileToValueMapper: Publication.fileObject,
+      valueToFileMapper: Publication.hashiObject,
+      fields: [] // 'type', 'hash'
+    }, formula);  
+  }
+  
+  
+  try {
+    initFileUpload($scope.formula);
+    // edit (or new) action
+    $scope.edit();
+  } catch (e) {
+    NpolarMessage.error(e);
+  }
+}
 
 module.exports = PublicationEditController;
