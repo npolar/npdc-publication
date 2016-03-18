@@ -40,7 +40,11 @@
 				"condition": "publication_type != 'book' && publication_type != 'map' && publication_type != 'poster' && publication_type != 'abstract'"
 			}, {
 				"id": "conference",
-				"condition": "publication_type == 'poster' || publication_type == 'abstract'"
+				"condition": "publication_type == 'poster' || publication_type == 'abstract'",
+        "fields": [{
+          "id": "country",
+          "enum": []
+          }]
 			},
 
 
@@ -70,7 +74,8 @@
 				"title": "issn"
 			}, {
 				"id": "publication_lang",
-				"title": "publication language"
+				"title": "publication language",
+        "enum": []
 			}, {
 				"id": "comment",
 				"title": "comment",
