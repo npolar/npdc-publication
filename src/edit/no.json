@@ -9,6 +9,30 @@
     "Filer"
   ],
   "fields": {
+    "overview": {
+      "title": "sammendrag for legfolk",
+      "description": "Sammendrag for legfolk, markdown akseptert"
+    },
+    "published": {
+      "title": "publisert"
+    },
+    "license": {
+      "title": "lisens"
+    },
+    "abstract": {
+      "title": "abstrakt",
+      "description": "Vitenskapelig abstrakt, markdown akseptert",
+      "items": {
+        "fields": {
+          "@language": {
+            "title": "språk"
+          },
+          "@value": {
+            "title": "abstrakt"
+          }
+        }
+      }
+    },
     "publication_type": {
       "title": "publikasjonstype",
       "values": [

@@ -2,14 +2,11 @@
 	"fieldsets": [{
 		"title": "Publication",
 		"fields": [{
-			"id": "title",
-			"title": "publication title"
+			"id": "title"
 		}, {
-			"id": "published",
-			"title": "Published year/date/time"
+			"id": "published"
 		}, {
-			"id": "publication_type",
-			"title": "publication type"
+			"id": "publication_type"
 		}, {
 			"id": "license",
 			"enum": [
@@ -21,11 +18,9 @@
 			]
 		}, {
 			"id": "abstract",
-			"title": "scientific abstract",
 			"type": "textarea"
 		}, {
 			"id": "overview",
-			"title": "summary for lay people",
 			"type": "textarea"
 		}]
 	}, {
@@ -40,21 +35,11 @@
 				"condition": "publication_type != 'book' && publication_type != 'map' && publication_type != 'poster' && publication_type != 'abstract'"
 			}, {
 				"id": "conference",
-				"condition": "publication_type == 'poster' || publication_type == 'abstract'",
-        "fields": [{
-          "id": "country",
-          "enum": []
-          }]
+				"condition": "publication_type == 'poster' || publication_type == 'abstract'"
 			},
-
-
-			{
-				"id": "volume",
-				"title": "volume"
-			}, {
-				"id": "issue",
-				"title": "issue"
-			}, {
+      "volume",
+      "issue",
+      {
 				"id": "suppl",
 				"title": "supplement"
 			}, {
@@ -67,18 +52,10 @@
 				"id": "art_no",
 				"title": "article no"
 			}, {
-				"id": "isbn",
-				"title": "isbn"
-			}, {
-				"id": "issn",
-				"title": "issn"
-			}, {
 				"id": "publication_lang",
-				"title": "publication language",
-        "enum": []
+				"title": "publication language"
 			}, {
 				"id": "comment",
-				"title": "comment",
 				"type": "textarea"
 			}
 		]
@@ -90,9 +67,7 @@
 		}]
 	}, {
 		"title": "Organisations",
-		"fields": [{
-			"id": "organisations"
-		}]
+		"fields": ["organisations"]
 	}, {
 		"title": "Classification",
 		"fields": [{
@@ -114,7 +89,8 @@
 					"Environmental management"
 				]
 			},
-			"tags", {
+			"tags",
+      {
 				"id": "research_stations",
 				"enum": [
 					"Troll",
@@ -125,33 +101,16 @@
 				]
 			}, {
 				"id": "locations",
-				"title": "Locations",
 				"items": {
-					"fields": [{
-						"id": "placename"
-					}, {
-						"id": "area"
-					}, {
-						"id": "country",
-						"hidden": true
-					}, {
-						"id": "hemisphere",
-						"hidden": true
-					}, {
-						"id": "latitude",
-						"hidden": true
-					}]
+					"fields": ["placename", "area", "!country", "!hemisphere", "!latitude"]
 				}
 			}
-
 		]
 	}, {
 		"title": "Links",
 		"fields": ["links"]
 	}, {
 		"title": "Files",
-		"fields": [{
-			"id": "files"
-		}]
+		"fields": ["files"]
 	}]
 }
