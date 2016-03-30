@@ -7,8 +7,19 @@
     <div layout>
       <npdc:collection collection="document.publication_type"></npdc:collection>
       <div style="margin: 8px; padding-top: 4px;"><md-icon>lock_open</md-icon>&nbsp;open data</div>
+      <a href="//doi.org/{{document.doi}}">{{ document.doi }}</a></h3>
+    
     </div>
 
+    
+<!--    <h3><a ng-href="./?filter-publication_type={{document.publication_type}}">{{ document.publication_type }}</a>-->
+<!--    <span ng-if="document.draft == 'yes'">{{ 'draft' | t  }}</span> -->
+    
+    
+    <!-- @todo https://github.com/npolar/npdc-common/issues/27 -->
+    <!-- open access logo see http://onlinelibrary.wiley.com/doi/10.1002/ece3.1988/abstract-->
+    <!-- @todo license logo -->
+    
     <h1 class="md-display-2">{{ document.title }}</h1>
 
     <h2 ng-if="document.journal.name || document.journal.np_series" class="md-display-1">{{ document.journal.name || document.journal.np_series }}

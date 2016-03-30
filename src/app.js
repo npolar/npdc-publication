@@ -62,16 +62,15 @@ npdcPublicationApp.filter('published', () => {
 
 // API HTTP interceptor
 npdcPublicationApp.config(($httpProvider, npolarApiConfig) => {
-  let environment = "production";
+  let environment = 'production';
   var autoconfig = new AutoConfig(environment);
   angular.extend(npolarApiConfig, autoconfig, { resources });
-  console.debug("npolarApiConfig", npolarApiConfig);
+  console.debug('npolarApiConfig', npolarApiConfig);
 
   $httpProvider.interceptors.push('npolarApiInterceptor');
 });
 
 // Inject npolarApiConfig and run
 npdcPublicationApp.run((npolarApiConfig, npdcAppConfig, NpolarTranslate) => {
-  npdcAppConfig.toolbarTitle = "Publications";
   NpolarTranslate.loadBundles('npdc-publication');
 });

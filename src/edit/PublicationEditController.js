@@ -18,7 +18,7 @@ function PublicationEditController($scope, $controller, formula, formulaAutoComp
   ];
 
   $scope.formula = formula.getInstance({
-    schema: 'edit/publication-1.json', //'//api.npolar.no/schema/publication',
+    schema: '//api.npolar.no/schema/publication',
     form: 'edit/formula.json',
     language: NpolarLang.getLang(),
     templates: npdcAppConfig.formula.templates.concat(templates),

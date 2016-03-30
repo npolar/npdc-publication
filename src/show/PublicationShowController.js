@@ -93,7 +93,7 @@ var PublicationShowController = function ($anchorScroll, $controller, $location,
       let relatedProjects = Project.array(relatedQuery).$promise;
 
       $q.all([relatedDatasets, relatedPublications, relatedProjects]).then((related) => {
-        $scope.related = related;
+        //$scope.related = related;
       });
 
     }, (errorData) => {
