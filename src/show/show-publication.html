@@ -6,8 +6,9 @@
   <div ng-if="document" class="np-doc">
     <div layout>
       <npdc:collection collection="document.publication_type"></npdc:collection>
-      <div style="margin: 8px; padding-top: 4px;"><md-icon>lock_open</md-icon>&nbsp;open data</div>
-      <a href="//doi.org/{{document.doi}}">{{ document.doi }}</a></h3>
+      <div style="margin: 8px; padding-top: 8px;"><!-- <md-icon>lock_open</md-icon>&nbsp;open data-->
+        doi: <a href="//doi.org/{{document.doi}}">{{ document.doi }}</a>
+      </div>
     
     </div>
 
