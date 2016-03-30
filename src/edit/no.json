@@ -1,0 +1,89 @@
+{
+  "fieldsets": [
+    "Publikasjon",
+    "Detaljer",
+    "Personer",
+    "Organisasjoner",
+    "Klassifisering",
+    "Lenker",
+    "Filer"
+  ],
+  "fields": {
+    "overview": {
+      "title": "sammendrag for legfolk",
+      "description": "Sammendrag for legfolk, markdown akseptert"
+    },
+    "published": {
+      "title": "publisert"
+    },
+    "license": {
+      "title": "lisens"
+    },
+    "abstract": {
+      "title": "abstrakt",
+      "description": "Vitenskapelig abstrakt, markdown akseptert",
+      "items": {
+        "fields": {
+          "@language": {
+            "title": "språk"
+          },
+          "@value": {
+            "title": "abstrakt"
+          }
+        }
+      }
+    },
+    "publication_type": {
+      "title": "publikasjonstype",
+      "values": [
+        "Fagfellevurdert publikasjon",
+        "Redaksjonelt",
+        "Oversiktartikkel / anmeldelse (review)",
+        "Korreksjon",
+        "Bok / bokkapittel",
+        "Poster",
+        "Rapport / Rapportbidrag",
+        "Sammendrag",
+        "Doktorgradavhandling",
+        "Masteroppgave",
+        "Kart",
+        "Kofereanseartikkel",
+        "Populærvitenskapelig",
+        "Annet"
+      ]
+    },
+    "state": {
+      "title": "status",
+      "values": ["Utkast / innsendt", "Akseptert", "Publisert"]
+    },
+    "np_series": {
+      "title": "NP rapporter",
+      "values": ["NPI Brief Report Series",
+        "NPI Report Series",
+        "NPI Series Kystkart",
+        "NPI Series Geologiske kart",
+        "NPI Series Meddelelser",
+        "NPI Series Skrifter",
+        "NPI Series Tekniske kart",
+        "NPI Series Temakart",
+        "NPI Series Topografiske kart",
+        "Annet"
+      ]
+    },
+    "draft": {
+      "title": "synlighet",
+      "description": "Vennligst sjekk dine referanser, og gjøre din oppføring offentlig synlig, hvis det er hensiktsmessig.",
+      "values": ["Final (synlig)", "Utkast (ikke synlig)"]
+    },
+    "publication_lang": {
+      "title": "språk"
+    },
+    "conference": {
+      "fields": {
+        "country": {
+          "title": "land"
+        }
+      }
+    }
+  }
+}
