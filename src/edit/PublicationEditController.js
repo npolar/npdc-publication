@@ -31,7 +31,7 @@ function PublicationEditController($scope, $controller, formula, formulaAutoComp
     form: 'edit/formula.json',
     language: NpolarLang.getLang(),
     templates: npdcAppConfig.formula.templates.concat(templates),
-    languages: npdcAppConfig.formula.languages
+    languages: npdcAppConfig.formula.languages.concat(i18n)
   });
   
   formulaAutoCompleteService.autocomplete({
