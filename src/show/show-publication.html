@@ -6,6 +6,8 @@
   <div ng-if="document" class="np-doc">
     <div layout>
       <a ng-href="./?filter-publication_type={{document.publication_type}}"><npdc:collection collection="document.publication_type"></npdc:collection><a ng-href="./?filter-publication_type={{document.publication_type}}">
+      
+      <npdc:licences licences="[document.license]"></npdc:licences>
       <div ng-if="document.doi" style="margin: 8px; padding-top: 8px;"><!-- <md-icon>lock_open</md-icon>&nbsp;open data-->
         doi: <a href="//doi.org/{{document.doi}}">{{ document.doi }}</a>
       </div>
@@ -26,6 +28,16 @@
       <h2 class="md-display-1">{{ c.name }}</h2>
       <p>{{ c.place }}, {{c.country }} ({{ c.dates[0].split('T')[0]}} — {{c.dates[1].split('T')[0]}})</p>
     </div>
+    
+    <section ng-if="security.hasSystem(resource.path)"><!--
+    FIXME @todo
+    If license was set after uploading, the files are restricted and therefore not available unless logged in and authorized
+    Once this is fixed, append this to the ng-if: || document.license
+    -->
+      <div ng-repeat="file in document.files">
+        <md-icon>file_download</md-icon> <a ng-href="{{file.uri+'?key='+key()}}">{{ file.filename}}</a> ({{ file.type }} {{ file.length | bytes }})
+      </div>
+    </section>
 
 
     <!--<section ng-if="citation" class="np-citation md-whiteframe-1dp">
@@ -46,15 +58,13 @@
     <section>
 
       <h3>{{ 'Abstract' | t }}</h3>
-      
       <div ng-repeat="o in document.abstract">
         <span lang="{{o['@language']}}" marked="{{ o['@value'] }}"></span>
       </div>
     </section>
-
-
-   <npdc:links links="links" related="related"></npdc:links>
-
+    
+    <npdc:links ng-if="security.hasSystem(resource.path) || document.license" links="links" related="related"></npdc:links>
+   
     <section>
       <npdc:organisations></npdc:organisations>
     </section>

@@ -16,21 +16,24 @@ function PublicationEditController($scope, $controller, formula, formulaAutoComp
       template: '<npdc:formula-placename></npdc:formula-placename>'
     }
   ];
-
-  $scope.formula = formula.getInstance({
-    schema: '//api.npolar.no/schema/publication',
-    form: 'edit/formula.json',
-    language: NpolarLang.getLang(),
-    templates: npdcAppConfig.formula.templates.concat(templates),
-    languages: npdcAppConfig.formula.languages.concat([{
+  
+  let i18n = [{
       map: require('./en.json'),
       code: 'en'
     },
     {
       map: require('./no.json'),
       code: 'nb_NO',
-    }])
+    }];
+
+  $scope.formula = formula.getInstance({
+    schema: '//api.npolar.no/schema/publication-1',
+    form: 'edit/formula.json',
+    language: NpolarLang.getLang(),
+    templates: npdcAppConfig.formula.templates.concat(templates),
+    languages: npdcAppConfig.formula.languages
   });
+  
   formulaAutoCompleteService.autocomplete({
     match: "publication_lang",
     querySource: npolarApiConfig.base + '/language',
@@ -51,6 +54,7 @@ function PublicationEditController($scope, $controller, formula, formulaAutoComp
     label: 'native',
     value: 'code'
   }, $scope.formula);
+  
 
   // @todo, need to redfine ES mapping...
   // let autocompleteFacets = ["id", "schema", "doi", "title", "publication_lang", "published", "volume", "issue", "suppl", "art_no", "page_count", "comment", "created", "updated", "created_by", "updated_by", "_id", "_rev", "abstract.@language", "abstract.@value", "overview.@language", "overview.@value", "locations.placename", "locations.area", "locations.country", "locations.hemisphere", "journal.id", "journal.name", "journal.np_series", "journal.series", "journal.series_no", "conference.id", "conference.name", "conference.place", "conference.country", "conference.dates", "people.id", "people.first_name", "people.last_name", "people.email", "people.roles", "people.organisation", "organisations.id", "organisations.name", "organisations.location", "organisations.roles", "links.rel", "links.href", "links.hreflang", "links.title", "links.type", "files.uri", "files.filename", "files.title", "files.length", "files.type", "files.hash"]

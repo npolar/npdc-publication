@@ -17,11 +17,9 @@
 				"http://creativecommons.org/licenses/by/4.0/"
 			]
 		}, {
-			"id": "abstract",
-			"type": "textarea"
+			"id": "abstract"
 		}, {
-			"id": "overview",
-			"type": "textarea"
+			"id": "overview"
 		}]
 	}, {
 		"title": "Details",

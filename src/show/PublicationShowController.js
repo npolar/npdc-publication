@@ -3,14 +3,21 @@
  * @ngInject
  */
 var PublicationShowController = function ($anchorScroll, $controller, $location, $routeParams, $scope, $sce, $q, $http,
-  NpolarLang,
-  Dataset, Project, Publication, npdcAppConfig) {
+  NpolarLang, NpolarApiSecurity, npdcAppConfig,
+  Dataset, Project, Publication) {
 
   $controller('NpolarBaseController', {$scope: $scope});
   $scope.resource = Publication;
   $scope.error = null;
   $scope.lang = NpolarLang;
-  console.debug($scope.lang.getNativeName('nb'));
+  
+  $scope.key = function() {
+    let system = NpolarApiSecurity.getSystem('read', $scope.resource.path);
+    if (system.key) {
+      return system.key;
+    }
+  };
+  
   $scope.isNpolar = (author) => {
     return (author && author.email && (/npolar/).test(author.email));
   };
