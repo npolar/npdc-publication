@@ -2,13 +2,15 @@
 /**
  * @ngInject
  */
-var PublicationShowController = function ($anchorScroll, $controller, $location, $routeParams,
-  $scope, $sce, $q, $http, Dataset, Project, Publication, npdcAppConfig) {
+var PublicationShowController = function ($anchorScroll, $controller, $location, $routeParams, $scope, $sce, $q, $http,
+  NpolarLang,
+  Dataset, Project, Publication, npdcAppConfig) {
 
   $controller('NpolarBaseController', {$scope: $scope});
   $scope.resource = Publication;
   $scope.error = null;
-
+  $scope.lang = NpolarLang;
+  console.debug($scope.lang.getNativeName('nb'));
   $scope.isNpolar = (author) => {
     return (author && author.email && (/npolar/).test(author.email));
   };
