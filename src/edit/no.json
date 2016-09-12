@@ -84,6 +84,37 @@
           "title": "land"
         }
       }
-    }
-  }
+    },
+    "links": {
+      "title": "lenker",
+      "description": "Lenker som har forbindelse til ekspedisjonen",
+      "items": {
+        "fields": {
+          "rel": {
+                  "title": "lenke type (forbindelse mellom denne registreringen og lenke)",
+                    "values": [
+                     "relatert",
+                    "service",
+                    "datasett",
+                    "prosjekt",
+                    "publikasjon",
+                    "datasenter",
+                    "stasjonsinformasjon",
+                    "referanse",
+                    "doi",
+                    "data",
+                    "forelder",
+                    "barn"
+                    ]
+                  },
+           "href":{
+            "title":"weblenke inkludert protokoll (f.eks. http:// som i lenken http://www.npolar.no)"
+          },
+          "title": {
+            "title": "tittel"
+          }
+              }
+      }
+}
+}
 }
