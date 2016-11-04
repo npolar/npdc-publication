@@ -62,7 +62,7 @@ npdcPublicationApp.filter('published', () => {
 
 // API HTTP interceptor
 npdcPublicationApp.config(($httpProvider, npolarApiConfig) => {
-  let environment = 'production';
+  let environment = 'test';
   var autoconfig = new AutoConfig(environment);
   angular.extend(npolarApiConfig, autoconfig, { resources });
   console.debug('npolarApiConfig', npolarApiConfig);
