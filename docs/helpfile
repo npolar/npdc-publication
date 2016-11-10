@@ -1,0 +1,148 @@
+##Background
+The publication database contains metadata about all papers produced by the Norwegian Polar Institute's employees. The employees fill in metadata about their own papers and the database is used when searching for papers and statistics about NPI research production.
+
+##Login
+To enter a new publication in the database – or to update/edit a previous entry – start by logging in to
+[Norwegian Polar Institute Publication Database](https://data.npolar.no/publication). The login button is located in the upper right corner (a "user menu"-icon (se picture below). Note - the credentials differ from the NPI network login. If you do not have a data.npolar.no account, please [contact us](https://github.com/npolar/npdc-publication/wiki/helpfile#contact). If you know your login name but have forgotten your password, you can use the button "email code" (under the "user menu"-icon). Then you will receive a one-time password as an email. Click on the submitted link to log in. To see if you are really logged in, hover the mouse over the "user menu"-icon. If logged in, you will see "<your name> user".
+
+When logged in, select "Publications" in the navigations menu ("cube"-icon, third button from top right).
+
+
+[[https://github.com/npolar/npdc-publication/blob/master/docs/img/Login.png | alt="How to login"]]
+
+##Language
+We are trying to keep the database in English, but if you want Norwegian texts, you can use "Usermenu" and select "English" at the bottom of the menu. Then you will be able to switch to Norwegian texts.
+
+[[https://github.com/npolar/npdc-publication/blob/master/docs/img/language_detail.png |alt="Change language"]]
+
+##Get started
+To enter a new record, choose "New" - the green "+"-icon button to the right (see picture below).
+
+[[https://github.com/npolar/npdc-publication/blob/master/docs/img/New_small.png |alt="Add new entry"]]
+
+To edit an existing record, start by searching for its title, select the relevant item, and choose "Edit” - the green button to the right with a "pencil"-icon.
+
+[[https://github.com/npolar/npdc-publication/blob/master/docs/img/Edit_small.png |alt="Edit entry"]]
+
+If you do not see any green buttons to the right at all when you are logged in, you are either not logged in or lack access rights. If so, please [contact us](https://github.com/npolar/npdc-publication/wiki/helpfile#contact).
+
+##Tabs
+###Title&ID
+**DOI:** When you have opened the publication for editing, start by filling in the DOI if applicable. An example of a DOI: "10.1016/j.coldregions.2016.06.006". Some journals write DOIs as "http://dx.doi.org/10.1016/j.coldregions.2016.06.006". If so, please do NOT include the prefix "http://dx.doi.org/" since it is only the resolver web address.
+
+A DOI is a permanent id to a paper, dataset or similar. That means if you have the DOI, you should be able to put "http://dx.doi.org/" in front of it, put it in the browser link search field and receive the paper. F.ex. to search for DOI 10.1016/j.coldregions.2016.06.006 you use link "http://dx.doi.org/10.1016/j.coldregions.2016.06.006" for search.
+
+Fill in DOI and save (green button "disk-icon" to the right, see below). Refresh page and now you should be able to see you title automatically filled in. If you receive an error message or nothing happens, something has gone wrong. If so, contact the Environmental Data Section. If necessary, you may have to fill in the information manually.
+
+**Title:** Publication title
+
+###Publication details
+Usually these are also filled in from the DOI. If not fill in the details.
+
+**Publication type:** Choose between peer-reviewed, book, editorial, in-book, in-report etc. It is mandatory to provide metadata for all peer-reviewed publications.
+
+**Published:** The date the publication was published in print. If the publication only exist online, use the date it was published online. Use YYYY-MM-DD as date format.
+
+**Journal, name:** Name of journal, alternatively newspaper, website, magazine etc.
+
+**NP series:** If the publication is an NPI series report, please name the series here.
+
+**Series:** Name of the report series if not NPI series, alternatively name of the university series for PhD or master or other thesis.
+
+**Series no:** Add the publication number/ID of the series.
+
+**Volume:** Volume is usually the number of years the publication has existed.
+
+**Issue:** Usually the number of the journal for that year.
+
+**Article no:** Some papers use article numbers instead of page numbers, especially if it is only a web publication.
+
+**Supplement:** Some journals have special issues typically for certain subjects or conferences. These are usually called supplements and could be given a supplement number.
+
+**Total number of pages:** Some journals only use the number of pages to refer to a publication, rather than the actual page number.
+
+**OR from page to page:** Add start page in one line and another for the ending page. You can add more elements by clicking on the blue "+"-button. Alternatively, you may minimize or delete an entry by clicking on the "three lines" icon to the right (see picture below).
+
+[[https://github.com/npolar/npdc-publication/blob/master/docs/img/Save_delete_expand_small.png |alt="expand, contract, remove elements"]]
+
+**issn:** The ISSN number if the publication has one.
+
+**isbn:** If it is a book/booklet, the publication most likely has a ISBN number.
+
+###People
+Fill in names of all authors.
+
+**id:** Omit this one. Same as you login email address.
+
+**First name:** Author's first name.
+
+**Last name:** Author's last name.
+
+**Email:** This is only for NPI people. Add your email address that must be the same as your login e-mail address. If you do this, the paper should be included on your NPI employee page.
+
+**Roles:** Add role, usually authors.
+
+**Organisation:** Set to "npolar.no" if NPI employee. For other organisations, there are no special code.
+
+###Organisations
+**Id:** If you want your paper to be visible at the "http://www.npolar.no/no/publikasjoner/" (alt "http://www.npolar.no/en/publications/") you need to fill in NPI as an organisation: id: "npolar.no".
+
+**Name:** Name of organisation, Norsk Polarinstitutt (alt Norwegian Polar Institute) for NPI participation.
+
+**Location:** Place of publication.
+
+**Roles:** NPI as an organisation should be set to "originator".
+
+###Summaries
+**Language:** Language of the abstract.
+
+**Abstract:** The scientific abstract - usually cut & paste from the paper abstract (if not filled in automatically through the DOI).
+
+**Language:** Set to "Norsk bokmål".
+
+**Overview for non-scientists:** This is the Norwegian summary to be submitted to the Ministry of Climate and Environment amongst others. They are selected by the section leaders and quality control is done by SMIR. To be filled in later if it has not been checked internally, aka you should never add an overview that has not been through an internal quality check.
+
+###Metadata
+**publication language:** Language of the publication, usually English.
+
+**NPI topics:** Select all that applies. These are used to label your paper on the NPI home pages, so more labels will increase your papers visiblity.
+
+**Programmes:** Include the section name(s) here so the paper will be added to the right section(s). You can search for the section list on the [NPI publication search](http://www.npolar.no/no/publikasjoner/) and choose "filter"-"program".
+
+**Tags:** Free-text tags to make it easier to find the paper during search.
+
+**NP research station:** Fill in name of the research station if your paper is affiliated with any.
+
+**draft:** If you set it to "yes" the entry will only be visible on the NPI Intranet. If set to "no" it will be visible on the Internet as well.
+
+###Links
+**rel:** Link affiliations with the paper. F.ex. dataset or project related to the publication etc.
+
+**href:** The link itself, f.ex. link to a project, https://data.npolar.no/project/207f3a4c-0757-473b-8bf9-b4f738798425. Please include the protocol in the link as well, f.ex. "https://" or "http://" or "ftp://"
+
+**hreflang:** The language of the link. Usually en (English) or no (Norwegian).
+
+**title:** The link title f.ex the project or dataset name.
+
+**type:** Omit this field. Use "text/html" or leave blank.
+
+
+###Files
+Upload files related, usually the publication itself, usually in pdf format. Please upload the paper if it lacks a DOI nor is already uploaded in Brage.
+
+##Contact
+Contact Environmental Data Section if you have problems or need help.
+
+##Frequently asked questions
+###1) Why is my publication not showing on my NPI employee page?
+All NPI employees have their own [home page](http://www.npolar.no/en/people/). In order to make a publication visible in your NPI employee page, go to "edit" and select tab "people", field "email" and add your login name here. It is important that it is your login name and not another e-mail address you use. Save and now the paper should be included under "Publications" on your NPI employee page. See also 4).
+
+###2) Why is my publication not showing in the NPI search?
+If you search [the NPI search](http://www.npolar.no/en/publications/), your publication should be included in the list if it is an NPI publication and thus also be included in the NPI annual report. The criteria for being an NPI publication is that NPI has supported the project financially or by salary so you could finish the activity/paper. If so go to "edit" and tab "organisations", field "id" and add "npolar.no" to the list of organisations. Set tab "organisations", field "roles" to "originator". See also 4).
+
+###3) Why is my publication not showing in our section search?
+If you search [the NPI search](http://www.npolar.no/en/publications/) and filter on f.ex. programme "Biodiversity", you should get a section list over publications. To get your paper included in the section list, go to "edit" and tab "Metadata", field "Programmes" and fill in the section(s) that apply. See also 4).
+
+###4) Why does my paper not show up at all on Internet/ why can't I find my paper when I want to edit it?
+Remember to log in to [the Norwegian Polar Data Center](https://data.npolar.no/home/). Search for your paper, go to "edit", tab "metadata", field "draft". If this field is set to "yes", the paper will not be visible on the Internet at all, only on the Intranet if you are logged in.
+
