@@ -281,9 +281,7 @@ DOI = {10.5194/tc-10-811-2016}
     },
 
     fileObject: function(hashi) {
-
-
-
+      
       return {
         uri: hashi.url,
         filename: hashi.filename,
@@ -297,46 +295,3 @@ DOI = {10.5194/tc-10-811-2016}
 
 }
 module.exports = Publication;
-
-/*
-ch@arken:~/npolar/npdc-publication$ curl -D - -L -H "Accept: application/json" "http://dx.doi.org/10.1126/science.1157784"
-10.1002/ece3.1988
-
-HTTP/1.1 303 See Other
-Server: Apache-Coyote/1.1
-Vary: Accept
-Location: http://data.crossref.org/10.1126%2Fscience.1157784
-Expires: Mon, 25 Apr 2016 12:31:34 GMT
-Content-Type: text/html;charset=utf-8
-Content-Length: 185
-Date: Mon, 25 Apr 2016 12:13:10 GMT
-
-HTTP/1.1 200 OK
-Access-Control-Allow-Origin: *
-Access-Control-Allow-Headers: X-Requested-With, Accept, Accept-Encoding, Accept-Charset, Accept-Language, Accept-Ranges, Cache-Control
-Access-Control-Expose-Headers: Link
-Link: <http://dx.doi.org/10.1126/science.1157784>; rel="canonical"
-Content-Type: application/json
-Content-Length: 1119
-Server: http-kit
-Date: Mon, 25 Apr 2016 12:11:07 GMT
-
-
-{"indexed":{"date-parts":[[2015,12,26]],"date-time":"2015-12-26T12:03:56Z","timestamp":1451131436609},"reference-count":28,"publisher":"American Association for the Advancement of Science (AAAS)","issue":"5942","published-print":{"date-parts":[[2009,8,14]]},"DOI":"10.1126\/science.1157784","type":"journal-article","created":{"date-parts":[[2009,8,13]],"date-time":"2009-08-13T21:49:17Z","timestamp":1250200157000},"page":"828-832","source":"CrossRef","title":"Strategic Reading, Ontologies, and the Future of Scientific Publishing","prefix":"http:\/\/id.crossref.org\/prefix\/10.1126","volume":"325","author":[{"affiliation":[],"family":"Renear","given":"A. H."},{"affiliation":[],"family":"Palmer","given":"C. L."}],"member":"http:\/\/id.crossref.org\/member\/221","published-online":{"date-parts":[[2009,8,13]]},"container-title":"Science","deposited":{"date-parts":[[2011,6,28]],"date-time":"2011-06-28T03:35:52Z","timestamp":1309232152000},"score":1.0,"subtitle":[],"issued":{"date-part
-*/
-
-// refCount!
-// multiplr licrndds?
-// "content-version": "tdm"
-// funderr uit.no=>
-//http://data.crossref.org/fundingdata/funder/10.13039/100007465
-// preflabel etc labels
-
-// funder "award": ["223259", "184719/S40"]
-	//"content-domain": {
-	//	"domain": ["elsevier.com", "sciencedirect.com"],
-	//	"crossmark-restriction": false
-	//},
-
-
-  // romeo { color: vlue}
