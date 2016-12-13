@@ -6,7 +6,7 @@ function PublicationShowController($anchorScroll, $controller, $location, $route
 
   'ngInject';
 
-  let self = this;
+  //let self = this;
 
   $controller('NpolarBaseController', {$scope: $scope});
   $scope.resource = Publication;
@@ -83,8 +83,9 @@ function PublicationShowController($anchorScroll, $controller, $location, $route
 
       if (publication.links instanceof Array) {
         $scope.links = publication.links.filter(l => {
-          return (l.rel !== "alternate" && l.rel !== "parent" && l.rel !== "edit" && l.rel !== "attachment"
-            && l.rel.toLowerCase() !== "doi" && false === (/doi[.]org/).test(l.href) );
+          return (l.rel !== "alternate" && l.rel !== "parent" && l.rel !== "edit" && l.rel !== "attachment" &&
+            l.rel.toLowerCase() !== "doi" &&
+            false === (/doi[.]org/).test(l.href) );
         });
 
         if ($scope.isOpen(publication) || $scope.security.hasSystem($scope.resource.path)) {
@@ -97,7 +98,7 @@ function PublicationShowController($anchorScroll, $controller, $location, $route
         if (publication.publication_type === 'in-report' && publication.journal && publication.journal.name) {
           $scope.parent = {
             title: publication.journal.name
-          }
+          };
         }
 
         let parent = publication.links.find(l => l.rel === "parent");

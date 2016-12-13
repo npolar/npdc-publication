@@ -21,9 +21,9 @@ var PublicationSearchController = function ($scope, $location, $controller, Publ
       } else {
         defaults.sort = "-updated,-published,publication_type";
       }
-      
+
     }
-   
+
     let invariants = $scope.security.isAuthenticated() ? {} : { "not-draft": "yes" } ;
     return Object.assign({}, defaults, invariants);
   };
@@ -36,8 +36,8 @@ var PublicationSearchController = function ($scope, $location, $controller, Publ
     if (e.journal && e.journal.name) {
      journal =  e.journal.name ;
     }
-    let updated = e.updated.split('T')[0];
-    
+    //let updated = e.updated.split('T')[0];
+
     let author = '';
     if (e.people && e.people.length) {
       let authors = e.people.filter(p => (p.roles||[]).includes('author'));
@@ -65,11 +65,11 @@ var PublicationSearchController = function ($scope, $location, $controller, Publ
 
     }
     let publisherName = journal;
-    if (publisherName == '') {
+    if (publisherName === '') {
       publisherName = (e.organisations||[]).filter(o => (o.roles||[]).includes('publisher')).map(o => o.name).join(' / ');
     }
-    
-    return `${author} (${publishedYear})${ publisherName != '' ? `. ${publisherName}` : ''}`;
+
+    return `${author} (${publishedYear})${ publisherName !== '' ? `. ${publisherName}` : ''}`;
    };
 
   npdcAppConfig.search.local.results.subtitle = "publication_type";
