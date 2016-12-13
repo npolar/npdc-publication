@@ -81,13 +81,15 @@
 		"title": "Classification",
 		"fields": [{
 				"id": "publication_lang",
-				"title": "publication language"
+				"title": "language of the publication"
 			}, {
 				"id": "topics",
+				"title": "topics: used by the NPI web site (http://npolar.no)",
 				"type": "array"
 			},
 			{
-				"id": "programme"
+				"id": "programme",
+				"title": "programmes: used for reporting"
 			},
 			{
 				"id": "research_stations"
