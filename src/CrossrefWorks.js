@@ -58,10 +58,15 @@ function CrossrefWorks($http, NpolarMessage) {
       if (m.editor && m.editor instanceof Array) {
         p.people = m.editor.map(a => {
           let organisation = JSON.stringify(a.affiliation.map(a => a.name)).split(/[\[\]\"]/).join('');
+          // @todo
+          //let affiliation = a.affiliation.map(a => {
+          //  return { '@value': a.name, '@language': 'en'};
+          //});
           return { first_name: a.given,
             last_name: a.family,
             roles: ["editor"],
-            organisation
+            organisation//,
+            //affiliation
           };
         });
         // @todo

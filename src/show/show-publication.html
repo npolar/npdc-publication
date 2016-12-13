@@ -34,7 +34,7 @@
           <a ng-href="//doi.org/{{document.doi}}"><img src="/assets/img/doi.png" height="20px" title="Digital Object Identifier">{{ document.doi }}</a>
       </span>
 
-      <h2 ng-if="parent || 'in-book' == document.publication_type || 'in-report' == document.publication_type">in <a ng-href="{{parent.id}}">{{ parent.title || document.journal.name }}</a></h2>
+      <h2 ng-if="parent || 'in-book' == document.publication_type || 'in-report' == document.publication_type">in <a ng-href="{{parent.id || parent.href}}">{{ parent.title || document.journal.name }}</a></h2>
 
       <!-- if book and editor -->
       <h2 class="md-headline" ng-if="authors.length > 0"><npdc:authors authors="authors"></npdc:authors></h2>
@@ -133,7 +133,7 @@
   <md-card>
     <md-card-header>
       <md-card-avatar>
-        <md-icon>label_outline</md-icon>
+        <md-icon>format_quote</md-icon>
       </md-card-avatar>
       <md-card-header-text>
         <span class="md-headline">{{'Citation' | t}}</span>

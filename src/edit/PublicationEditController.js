@@ -80,7 +80,7 @@ function PublicationEditController($scope, $controller, $http, $location,
     //"conference.place", "conference.country", "conference.dates", "people.id", "people.first_name", "people.last_name", "people.email", "people.roles", "people.organisation",
     //"organisations.id", "organisations.name", "organisations.location", "organisations.roles", "links.rel", "links.href", "links.hreflang",
     //"links.title", "links.type", "files.uri", "files.filename", "files.title", "files.length", "files.type", "files.hash"]
-    let autocompleteFacets = ['tags', 'journal.name', 'links.type', 'links.rel',
+    let autocompleteFacets = ['tags', 'journal.name', 'links.type',
       'organisations.id', 'organisations.name', 'organisations.location'];
     formulaAutoCompleteService.autocompleteFacets(autocompleteFacets, $scope.resource, $scope.formula);
   }

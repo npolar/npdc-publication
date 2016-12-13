@@ -5,19 +5,16 @@
 				"id": "title",
 				"title": "title"
 			},
-			"publication_type",
 			{
 				"id": "doi",
-				"title": "doi [will fetch publication metadata from crossref.org]"
+				"title": "DOI [will fetch metadata from crossref.org (if no title is set)]"
 			},
+			"publication_type",
 			{
 				"id": "published",
 				"title": "published: when was the earliest version of record available? (date, or year-month, or year)"
-			},
-			{
-				"id": "published-print",
-				"title": "published-print: issue date or publication date for official printed version (date, or year-month, or year)"
 			}
+
 		]
 	}, {
 		"title": "Details",
@@ -92,22 +89,16 @@
 			{
 				"id": "programme"
 			},
-			"tags",
 			{
-				"id": "research_stations",
-				"enum": [
-					"Troll",
-					"Ny-Ålesund",
-					"Zeppelin",
-					"Bouvetøya",
-					"Svarthamaren"
-				]
-			}, {
+				"id": "research_stations"
+			},
+			{
 				"id": "locations",
 				"items": {
 					"fields": ["placename", "area", "!country", "!hemisphere", "!latitude"]
 				}
 			},
+			"tags",
 			"draft",
 			"state", {
 				"id": "comment",
@@ -116,13 +107,13 @@
 		]
 	}, {
 		"title": "Links",
-		"fields": ["links"]
+		"fields": [{ "id": "links", "fields": [{"id": "rel", "enum": ["a","b"]}]}]
 	}, {
 		"title": "Files",
 
 		"fields": [{
 			"id": "license",
-			"enum": [
+			"items": {"enum": [
 				null,
 				"http://creativecommons.org/publicdomain/mark/1.0/",
 				"http://creativecommons.org/publicdomain/zero/1.0/",
@@ -130,6 +121,7 @@
 				"http://creativecommons.org/licenses/by/3.0/",
 				"http://creativecommons.org/licenses/by/4.0/"
 			]
+			}
 		}, "files"]
 	}]
 }

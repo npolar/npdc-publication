@@ -108,7 +108,7 @@ function PublicationShowController($anchorScroll, $controller, $location, $route
           $http.get(uri).then(r =>  {
             $scope.parent = r.data;
           }, (e) => {
-            $scope.parent = { title: parent.href };
+            $scope.parent = { title: parent.title, href: parent.href };
           });
         }
       }
