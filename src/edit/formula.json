@@ -2,42 +2,35 @@
 	"fieldsets": [{
 		"title": "Publication",
 		"fields": [{
-			"id": "title"
-		}, {
-			"id": "published"
-		}, {
-			"id": "publication_type"
-		}, {
-			"id": "license",
-			"enum": [
-				null,
-				"http://creativecommons.org/publicdomain/mark/1.0/",
-				"http://creativecommons.org/publicdomain/zero/1.0/",
-				"http://creativecommons.org/licenses/by-nc-nd/4.0/",
-				"http://creativecommons.org/licenses/by/4.0/"
-			]
-		}, {
-			"id": "abstract"
-		}, {
-			"id": "overview"
-		}]
+				"id": "title",
+				"title": "title"
+			},
+			{
+				"id": "doi",
+				"title": "DOI [will fetch metadata from crossref.org (if no title is set)]"
+			},
+			"publication_type",
+			{
+				"id": "published",
+				"title": "published: when was the earliest version of record available? (date, or year-month, or year)"
+			}
+
+		]
 	}, {
 		"title": "Details",
-		"fields": [
-			"doi",
-			"isbn",
-			"issn",
-
-			{
+		"fields": [{
 				"id": "journal",
+				"fields": ["!id"],
 				"condition": "publication_type != 'book' && publication_type != 'map' && publication_type != 'poster' && publication_type != 'abstract'"
 			}, {
 				"id": "conference",
 				"condition": "publication_type == 'poster' || publication_type == 'abstract'"
 			},
-      "volume",
-      "issue",
-      {
+			"volume",
+			"issue", {
+				"id": "art_no",
+				"title": "article no"
+			}, {
 				"id": "suppl",
 				"title": "supplement"
 			}, {
@@ -46,16 +39,9 @@
 			}, {
 				"id": "pages",
 				"title": "OR from page to page"
-			}, {
-				"id": "art_no",
-				"title": "article no"
-			}, {
-				"id": "publication_lang",
-				"title": "publication language"
-			}, {
-				"id": "comment",
-				"type": "textarea"
-			}
+			},
+			"issn",
+			"isbn"
 		]
 	}, {
 		"title": "People",
@@ -67,68 +53,75 @@
 		"title": "Organisations",
 		"fields": ["organisations"]
 	}, {
+		"title": "Texts",
+		"fields": [{
+			"id": "abstract",
+			"items": {
+				"fields": [{
+					"id": "@language",
+					"default": "en"
+				}, {
+					"id": "@value",
+					"type": "textarea"
+				}]
+			}
+		}, {
+			"id": "overview",
+			"items": {
+				"fields": [{
+					"id": "@language",
+					"default": "nb"
+				}, {
+					"id": "@value",
+					"type": "textarea"
+				}]
+			}
+		}]
+	}, {
 		"title": "Classification",
 		"fields": [{
+				"id": "publication_lang",
+				"title": "publication language"
+			}, {
 				"id": "topics",
 				"type": "array"
-			}, {
-				"id": "programme",
-				"title": "programmes",
-				"enum": [
-					"ICE Ecosystems",
-					"ICE Fluxes",
-					"ICE Antarctica",
-					"N-ICE",
-					"ICE",
-					"Biodiversity",
-					"Environmental pollutants",
-					"Geology and geophysics",
-					"Oceans and sea ice",
-					"Environmental management"
-				]
 			},
-			"tags",
-      {
-				"id": "research_stations",
-				"enum": [
-					"Troll",
-					"Ny-Ålesund",
-					"Zeppelin",
-					"Bouvetøya",
-					"Svarthamaren"
-				]
-			}, {
+			{
+				"id": "programme"
+			},
+			{
+				"id": "research_stations"
+			},
+			{
 				"id": "locations",
 				"items": {
 					"fields": ["placename", "area", "!country", "!hemisphere", "!latitude"]
 				}
+			},
+			"tags",
+			"draft",
+			"state", {
+				"id": "comment",
+				"type": "textarea"
 			}
 		]
-	},
-	 {
-      "title": "Links",
-      "fields": [{
-        "id": "links",
-        "items": {
-          "fields": [{
-            "id": "rel",
-            "title": "type of link (relation between this registration and the link)"
-          }, {
-            "id": "href",
-            "title": "link (please include protocol f.ex. 'http://' as in link http://www.npolar.no)"
-          },
-        "!hreflang",
-        "!type",
-        {
-          "id": "title",
-          "title": "link title"
-        }
-          ]
-        }
-      }]
-},
- {
+	}, {
+		"title": "Links",
+		"fields": [{ "id": "links", "fields": [{"id": "rel", "enum": ["a","b"]}]}]
+	}, {
 		"title": "Files",
-		"fields": ["files"]
+
+		"fields": [{
+			"id": "license",
+			"items": {"enum": [
+				null,
+				"http://creativecommons.org/publicdomain/mark/1.0/",
+				"http://creativecommons.org/publicdomain/zero/1.0/",
+				"http://creativecommons.org/licenses/by-nc-nd/4.0/",
+				"http://creativecommons.org/licenses/by/3.0/",
+				"http://creativecommons.org/licenses/by/4.0/"
+			]
+			}
+		}, "files"]
 	}]
 }

@@ -10,11 +10,14 @@ var router = function($routeProvider, $locationProvider) {
   $routeProvider.when('/:id', {
     templateUrl: 'show/show-publication.html',
     controller: 'PublicationShowController'
+  }).when('/10^', {
+    templateUrl: 'show/show-publication.html',
+    controller: 'PublicationShowController'
   }).when('/:id/edit', {
-    template: '<npdc:formula></npdc:formula>',
+    templateUrl: 'edit/edit-publication.html',
     controller: 'PublicationEditController'
   }).when('/', {
-    template: '<npdc-search:input feed="feed"></npdc-search:input><npdc:search feed="feed"></npdc:search>',
+    template: require('./search/search-publication.html'),
     controller: 'PublicationSearchController',
     reloadOnSearch: false
   });

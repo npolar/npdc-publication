@@ -2,12 +2,17 @@
 
 let npdcCommon = require('npdc-common');
 let AutoConfig = npdcCommon.AutoConfig;
-
-var angular = require('angular');
+let angular = require('angular');
 
 var npdcPublicationApp = angular.module('npdcPublicationApp', ['npdcCommon']);
+npdcPublicationApp.factory('PublicationBibTeX', require('./PublicationBibTeX'));
+npdcPublicationApp.factory('CrossrefWorks', require('./CrossrefWorks'));
+npdcPublicationApp.factory('SherpaRomeo', require('./SherpaRomeo'));
+
 npdcPublicationApp.factory('Publication', require('./edit/Publication'));
 
+
+npdcPublicationApp.controller('PublicationHomeController', require('./search/PublicationHomeController'));
 npdcPublicationApp.controller('PublicationShowController', require('./show/PublicationShowController'));
 npdcPublicationApp.controller('PublicationSearchController', require('./search/PublicationSearchController'));
 npdcPublicationApp.controller('PublicationEditController', require('./edit/PublicationEditController'));
@@ -16,6 +21,7 @@ npdcPublicationApp.controller('PublicationEditController', require('./edit/Publi
 var resources = [
   {'path': '/', 'resource': 'NpolarApi'},
   {'path': '/user', 'resource': 'User'},
+  {'path': '/person', 'resource': 'Person'},
   {'path': '/dataset', 'resource': 'Dataset' },
   {'path': '/publication', 'resource': 'PublicationResource' },
   {'path': '/project', 'resource': 'Project' }
@@ -62,12 +68,16 @@ npdcPublicationApp.filter('published', () => {
 
 // API HTTP interceptor
 npdcPublicationApp.config(($httpProvider, npolarApiConfig) => {
-  let environment = 'test';
-  var autoconfig = new AutoConfig(environment);
-  angular.extend(npolarApiConfig, autoconfig, { resources });
+
+  let environment = 'production';
+  let autoconfig = new AutoConfig(environment);
+  let romeo = { key: '4JiApGee7Js' };
+  angular.extend(npolarApiConfig, autoconfig, { romeo }, { resources });
+
   console.debug('npolarApiConfig', npolarApiConfig);
 
   $httpProvider.interceptors.push('npolarApiInterceptor');
+  //$httpProvider.interceptors.push('xmlHttpInterceptor');
 });
 
 // Inject npolarApiConfig and run

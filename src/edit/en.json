@@ -1,8 +1,5 @@
 {
   "fields": {
-    "overview": {
-      "title": "summary for lay people"
-    },
     "abstract": {
       "items": {
         "fields": {
@@ -15,28 +12,37 @@
         }
       }
     },
-    "publication_type": {
+    "overview": {
+      "title": "overview for non-scientists",
+      "items": {
+        "fields": {
+          "@language": {
+            "title": "language"
+          },
+          "@value": {
+            "title": "overview"
+          }
+        }
+      }
+    },
+    "zap_publication_type": {
       "title": "type of publication",
       "values": [
-        "Peer-Reviewed Publication",
-        "Editorial Material in Peer-Reviewed Publication",
-        "Publication Review in Peer-Reviewed Publication",
-        "Correction or Comment in Peer-Reviewed Publication",
-        "Book or Book Chapter",
+        "Research article (peer-reviewed)",
+        "Editorial",
+        "Review",
+        "Errata or comment",
+        "Book or chapter",
         "Poster",
-        "Report or Report Chapter",
+        "Report or report chapter",
         "Abstract",
-        "PhD Thesis",
-        "Master Thesis",
+        "PhD thesis",
+        "Master's thesis",
         "Map",
-        "Proceedings",
-        "Popular Science",
+        "Conference proceedings",
+        "Popular science",
         "Other"
       ]
-    },
-    "state": {
-      "title": "progress status",
-      "values": ["Draft/submitted", "Accepted", "Published"]
     },
     "np_series": {
       "title": "NP reports",
@@ -51,56 +57,6 @@
         "NPI Series Topografiske kart",
         "Other"
       ]
-    },
-    "draft": {
-      "title": "visibility",
-      "description": "Please check your reference details, and make your entry publicly visible, if appropriate.",
-      "values": ["Final (visible)", "Draft (not visible)"]
-    },
-    "publication_lang": {
-      "title": "language",
-      "values": ["Abkhaz", "Arabic", "Aragonese", "Armenian", "Assamese", "Avaric", "Azerbaijani",
-        "Basque", "Belarusian", "Bihari", "Bosnian", "Breton", "Bulgarian", "Catalan, Valencian",
-        "Chechen", "Chinese", "Chuvash", "Cornish", "Croatian", "Czech", "Danish",
-        "Dutch", "Dzongkha", "English", "Estonian", "Faroese", "Finnish",
-        "French", "Galician", "Georgian", "German", "Greek", "Hebrew", "Hindi", "Hungarian",
-        "Indonesian", "Irish", "Inupiaq", "Icelandic", "Italian", "Inuktitut", "Japanese",
-        "Kalaallisut,Greenlandic", "Kashmiri", "Kazakh", "Kyrgyz", "Komi", "Korean", "Luxembourgish",
-        "Lithuanian", "Latvian", "Manx", "Macedonian", "Malayalam", "Marathi", "Mongolian",
-        "Nepali", "Norwegian", "Nuosu", "Occitan", "Old Bulgarian, Slavonic",
-        "Oriya", "Ossetian", "Punjabi", "Persian",
-        "Polish", "Portuguese", "Quechua", "Romansh", "Romanian, Moldavian", "Russian", "Sindhi",
-        "Northern Sami", "Serbian", "Scottish Gaelic", "Sinhalese",
-        "Slovak", "Slovene", "Spanish; Castilian", "Swedish", "Tamil", "Telugu", "Tajik",
-        "Tibetan", "Turkmen", "Turkish", "Tatar", "Uighur", "Ukrainian", "Urdu", "Uzbek", "Walloon",
-        "Welsh", "Western Frisian", "Yiddish", "Zhuang"
-      ]
-    },
-    "conference": {
-      "fields": {
-        "country": {
-          "title": "country",
-          "values": [
-            "Åland Islands", "Algeria", "Andorra", "Antarctica", "Argentina", "Armenia",
-            "Australia", "Austria", "Azerbaijan", "Bangladesh", "Belgium", "Bhutan", "Bosnia and Herzegovina",
-            "Botswana", "Brazil", "Bulgaria", "Cambodia", "Canada", "Chile", "China", "Colombia", "Costa Rica",
-            "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Ecuador", "Egypt", "Eritrea", "Estonia",
-            "Ethiopia", "Faroe Islands", "Fiji", "Finland", "France", "Gambia", "Georgia", "Germany", "Ghana", "Greece",
-            "Greenland", "Guatemala", "Hong Kong", "Hungary", "Iceland", "India", "Indonesia", "Iran, Islamic Republic of",
-            "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Korea, Republic of",
-            "Kyrgyzstan", "Latvia", "Liechtenstein", "Lithuania", "Luxembourg", "Macedonia, the former Yugoslav Republic of",
-            "Malaysia", "Malta", "Mexico", "Moldova, Republic of", "Monaco", "Mongolia", "Montenegro", "Morocco",
-            "Myanmar", "Namibia", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Nigeria", "Norway", "Pakistan",
-            "Panama", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Puerto Rico", "Qatar", "Romania",
-            "Russian Federation", "Samoa", "San Marino", "Saudi Arabia", "Senegal", "Serbia", "Seychelles",
-            "Singapore", "Slovakia", "Slovenia", "South Africa", "Spain", "Sri Lanka", "Sudan", "Suriname",
-            "Svalbard and Jan Mayen", "Swaziland", "Sweden", "Switzerland", "Syrian Arab Republic", "Taiwan, Province of China",
-            "Tajikistan", "Tanzania, United Republic of", "Thailand", "Trinidad and Tobago", "Tunisia", "Turkey",
-            "Turkmenistan", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States",
-            "Uruguay", "Uzbekistan", "Venezuela, Bolivarian Republic of", "Viet Nam", "Zambia", "Zimbabwe"
-          ]
-        }
-      }
     }
   }
 }
