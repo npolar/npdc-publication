@@ -20,7 +20,7 @@
 		"title": "Details",
 		"fields": [{
 				"id": "journal",
-				"fields": ["!id"],
+				"fields": ["!id", "!np_series", "!series", "!series_no"],
 				"condition": "publication_type != 'book' && publication_type != 'map' && publication_type != 'poster' && publication_type != 'abstract'"
 			}, {
 				"id": "conference",

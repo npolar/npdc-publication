@@ -99,7 +99,7 @@ function PublicationEditController($scope, $controller, $http, $location,
       },*/
       fileToValueMapper: Publication.fileObject,
       valueToFileMapper: Publication.hashiObject,
-      fields: ['type', 'hash', 'uri']
+      fields: ['uri'] //'type', 'hash',
     }, formula);
   }
 
