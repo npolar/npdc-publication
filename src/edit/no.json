@@ -1,13 +1,4 @@
 {
-  "fieldsets": [
-    "Publikasjon",
-    "Detaljer",
-    "Personer",
-    "Organisasjoner",
-    "Klassifisering",
-    "Lenker",
-    "Filer"
-  ],
   "fields": {
     "overview": {
       "title": "sammendrag for legfolk",
@@ -33,22 +24,22 @@
         }
       }
     },
-    "publication_type": {
+    "zap_publication_type": {
       "title": "publikasjonstype",
       "values": [
-        "Fagfellevurdert publikasjon",
+        "Artikkel (fagfellevurdert)",
         "Redaksjonelt",
-        "Oversiktartikkel / anmeldelse (review)",
+        "Anmeldelse / oversiktsartikkel",
         "Korreksjon",
         "Bok / bokkapittel",
         "Poster",
-        "Rapport / Rapportbidrag",
+        "Rapport / rapportbidrag",
         "Sammendrag",
         "Doktorgradavhandling",
         "Masteroppgave",
         "Kart",
-        "Kofereanseartikkel",
-        "Populærvitenskapelig",
+        "Konfereanseartikkel",
+        "Populærvitenskap / avisinnlegg",
         "Annet"
       ]
     },

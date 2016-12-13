@@ -2,42 +2,38 @@
 	"fieldsets": [{
 		"title": "Publication",
 		"fields": [{
-			"id": "title"
-		}, {
-			"id": "published"
-		}, {
-			"id": "publication_type"
-		}, {
-			"id": "license",
-			"enum": [
-				null,
-				"http://creativecommons.org/publicdomain/mark/1.0/",
-				"http://creativecommons.org/publicdomain/zero/1.0/",
-				"http://creativecommons.org/licenses/by-nc-nd/4.0/",
-				"http://creativecommons.org/licenses/by/4.0/"
-			]
-		}, {
-			"id": "abstract"
-		}, {
-			"id": "overview"
-		}]
+				"id": "title",
+				"title": "title [or paste a BibTeX reference]"
+			},
+			"publication_type",
+			{
+				"id": "doi",
+				"title": "doi [will fetch publication metadata from crossref.org]"
+			},
+			{
+				"id": "published",
+				"title": "published: when was the earliest version of record available? (date, or year-month, or year)"
+			},
+			{
+				"id": "published-print",
+				"title": "published-print: issue date or publication date for official printed version (date, or year-month, or year)"
+			}
+		]
 	}, {
 		"title": "Details",
-		"fields": [
-			"doi",
-			"isbn",
-			"issn",
-
-			{
+		"fields": [{
 				"id": "journal",
+				"fields": ["!id"],
 				"condition": "publication_type != 'book' && publication_type != 'map' && publication_type != 'poster' && publication_type != 'abstract'"
 			}, {
 				"id": "conference",
 				"condition": "publication_type == 'poster' || publication_type == 'abstract'"
 			},
-      "volume",
-      "issue",
-      {
+			"volume",
+			"issue", {
+				"id": "art_no",
+				"title": "article no"
+			}, {
 				"id": "suppl",
 				"title": "supplement"
 			}, {
@@ -46,16 +42,9 @@
 			}, {
 				"id": "pages",
 				"title": "OR from page to page"
-			}, {
-				"id": "art_no",
-				"title": "article no"
-			}, {
-				"id": "publication_lang",
-				"title": "publication language"
-			}, {
-				"id": "comment",
-				"type": "textarea"
-			}
+			},
+			"issn",
+			"isbn"
 		]
 	}, {
 		"title": "People",
@@ -67,28 +56,44 @@
 		"title": "Organisations",
 		"fields": ["organisations"]
 	}, {
+		"title": "Texts",
+		"fields": [{
+			"id": "abstract",
+			"items": {
+				"fields": [{
+					"id": "@language",
+					"default": "en"
+				}, {
+					"id": "@value",
+					"type": "textarea"
+				}]
+			}
+		}, {
+			"id": "overview",
+			"items": {
+				"fields": [{
+					"id": "@language",
+					"default": "nb"
+				}, {
+					"id": "@value",
+					"type": "textarea"
+				}]
+			}
+		}]
+	}, {
 		"title": "Classification",
 		"fields": [{
+				"id": "publication_lang",
+				"title": "publication language"
+			}, {
 				"id": "topics",
 				"type": "array"
-			}, {
-				"id": "programme",
-				"title": "programmes",
-				"enum": [
-					"ICE Ecosystems",
-					"ICE Fluxes",
-					"ICE Antarctica",
-					"N-ICE",
-					"ICE",
-					"Biodiversity",
-					"Environmental pollutants",
-					"Geology and geophysics",
-					"Oceans and sea ice",
-					"Environmental management"
-				]
+			},
+			{
+				"id": "programme"
 			},
 			"tags",
-      {
+			{
 				"id": "research_stations",
 				"enum": [
 					"Troll",
@@ -102,6 +107,11 @@
 				"items": {
 					"fields": ["placename", "area", "!country", "!hemisphere", "!latitude"]
 				}
+			},
+			"draft",
+			"state", {
+				"id": "comment",
+				"type": "textarea"
 			}
 		]
 	}, {
@@ -109,6 +119,17 @@
 		"fields": ["links"]
 	}, {
 		"title": "Files",
-		"fields": ["files"]
+
+		"fields": [{
+			"id": "license",
+			"enum": [
+				null,
+				"http://creativecommons.org/publicdomain/mark/1.0/",
+				"http://creativecommons.org/publicdomain/zero/1.0/",
+				"http://creativecommons.org/licenses/by-nc-nd/4.0/",
+				"http://creativecommons.org/licenses/by/3.0/",
+				"http://creativecommons.org/licenses/by/4.0/"
+			]
+		}, "files"]
 	}]
 }

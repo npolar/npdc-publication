@@ -2,94 +2,152 @@
 <npdc:edit-button class="np-primary-control"></npdc:edit-button>
 <npdc:loader ng-if="!document"></npdc:loader>
 
-<div class="np-padding">
-  <div ng-if="document" class="np-doc">
-    <div layout>
-      <a ng-href="./?filter-publication_type={{document.publication_type}}"><npdc:collection collection="document.publication_type"></npdc:collection><a ng-href="./?filter-publication_type={{document.publication_type}}">
-      
-      <npdc:licences licences="[document.license]"></npdc:licences>
-      <div ng-if="document.doi" style="margin: 8px; padding-top: 8px;"><!-- <md-icon>lock_open</md-icon>&nbsp;open data-->
-        doi: <a href="//doi.org/{{document.doi}}">{{ document.doi }}</a>
+<div ng-if="document">
+  <md-card>
+    <md-card-header>
+      <md-card-avatar>
+        <md-icon>description</md-icon>
+      </md-card-avatar>
+      <md-card-header-text>
+        <span class="md-headline">{{ document.publication_type | t}}</span>
+        <span ng-if="publishers.length > 0" class="md-subhead">{{ 'Published'|t }} {{ document.published }} {{ 'by' | t}} <span ng-repeat="p in publishers">
+            {{ p.name }} <span ng-if="!$last">,</span>
+        </span>
+      </md-card-header-text>
+    </md-card-header>
+    <md-card-content>
+      <h1 class="md-display-2">{{ document.title }}</h1>
+
+      <h2 ng-if="(document.journal.name || document.journal.np_series) && 'in-book' != document.publication_type && 'in-report' != document.publication_type" class="md-headline">
+        <i>{{ document.journal.name || document.journal.np_series }}</i>
+        {{ document.journal.series }}
+        <span ng-if="document.volume || document.journal.series_no">{{ document.volume || document.journal.series_no}}</span>
+        <span ng-if="document.issue">({{document.issue}})</span>
+
+        <span ng-if="document.pages.length == 2"> pp. {{ document.pages[0]}}-{{document.pages[1]}}</span>
+        <span ng-if="document.pages.length == 1"> pp. {{ document.pages[0]}}</span>
+
+        <span ng-if="document.published">({{ document.published.split('-')[0] }})</span>
+      </h2>
+
+      <span ng-if="document.doi">
+          <a ng-href="//doi.org/{{document.doi}}"><img src="/assets/img/doi.png" height="20px" title="Digital Object Identifier">{{ document.doi }}</a>
+      </span>
+
+      <h2 ng-if="parent || 'in-book' == document.publication_type || 'in-report' == document.publication_type">in <a ng-href="{{parent.id}}">{{ parent.title || document.journal.name }}</a></h2>
+
+      <!-- if book and editor -->
+      <h2 class="md-headline" ng-if="authors.length > 0"><npdc:authors authors="authors"></npdc:authors></h2>
+
+      <div ng-if="coauthors.length > 0">Co-authored by <npdc:authors authors="coauthors"></npdc:authors></div>
+      <div ng-if="editors.length" class="md-subhead">Edited by <span ng-repeat="name in names(editors)">{{name}}<span ng-if="!$last">,</span> </span></div>
+
+      <div ng-if="document.conference" ng-init="c = document.conference">
+        <p>Presented at: {{ c.name }}, {{ c.place }}, {{c.country }} ({{ c.dates[0].split('T')[0]}} — {{c.dates[1].split('T')[0]}})</p>
       </div>
-    </div>
 
-    <!-- @todo licensing -->
-    <h1 class="md-display-2">{{ document.title }}</h1>
+      <section ng-if="document.files.length > 0">
+        <div ng-repeat="file in document.files">
+          <!-- <span ng-show="!isOpen(document)"><md-icon title="protected: the provided link only works during your current login session">lock</md-icon></span> -->
+          <span><md-icon>file_download</md-icon></span>
+          <span>
+            <a ng-href="{{ attachmentUri(file) }}">{{ file.filename}}</a> ({{ file.length | bytes }}) <!-- {{ file.type }} -->
+          </span>
+        </div>
+      </section>
+    </md-card-content>
+  </md-card>
 
-    <h2 ng-if="document.journal.name || document.journal.np_series" class="md-display-1">{{ document.journal.name || document.journal.np_series }}
-      <span ng-if="document.volume || document.journal.series_no">{{ document.volume || document.journal.series_no}}</span><span ng-if="document.issue">({{document.issue}})</span><span ng-if="document.pages">, {{ document.pages[0]}}-{{document.pages[1]}}</span> ({{ document.published.split('-')[0] }})
-    </h2>
+  <span id="text" class="anchor"></span>
+  <md-card>
+    <md-card-header>
+      <md-card-avatar>
+        <md-icon>text_fields</md-icon>
+      </md-card-avatar>
+      <md-card-header-text>
+        <span class="md-headline">{{'Texts' | t}}</span>
+        <span class="md-subhead">Scientific abstract and summary for non-scientists</span>
+      </md-card-header-text>
+    </md-card-header>
+    <md-card-content>
+      <section ng-if="document.abstract.length > 0">
+        <h3>{{ 'Abstract' | t }}</h3>
+        <div ng-repeat="a in document.abstract">
+          {{ lang.getNativeName(a['@language']) }} <span marked="a['@value']||'Missing'"></span>
+        </div>
+      </section>
 
-    <!-- if book and editor -->
-    <npdc:authors ng-if="editors.length == 0" authors="authors"></npdc:authors>
-    <div ng-if="editors.length" class="md-subhead">Edited by <span ng-repeat="name in names(editors)">{{name}}<span ng-if="!$last">,</span> </span></div>
+      <section ng-if="document.overview.length > 0">
+        <h3>{{ 'Overview' | t }} ({{'for non-scientists'|t}})</h3>
+        <div ng-repeat="o in document.overview">
+          {{ lang.getNativeName(o['@language']) }} <span marked="o['@value']||'Mangler'"></span>
+        </div>
+      </section>
 
-    <div ng-if="document.conference" ng-init="c = document.conference">
-      <h2 class="md-display-1">{{ c.name }}</h2>
-      <p>{{ c.place }}, {{c.country }} ({{ c.dates[0].split('T')[0]}} — {{c.dates[1].split('T')[0]}})</p>
-    </div>
-    
-    <section ng-if="security.hasSystem(resource.path)"><!--
-    FIXME @todo
-    If license was set after uploading, the files are restricted and therefore not available unless logged in and authorized
-    Once this is fixed, append this to the ng-if: || document.license
-    -->
-      <div ng-repeat="file in document.files">
-        <md-icon>file_download</md-icon> <a ng-href="{{file.uri+'?key='+key()}}">{{ file.filename}}</a> ({{ file.type }} {{ file.length | bytes }})
-      </div>
-    </section>
+    </md-card-content>
+  </md-card>
 
+  <npdc:links links="links"></npdc:links>
 
-    <!--<section ng-if="citation" class="np-citation md-whiteframe-1dp">
-      <h4>Citation</h4>
-      <span>{{citation}}</span><br>
-      <span ng-if="doi">DOI: <a ng-href="{{doi.href}}">{{doi.title}}</a></span>
-    </section>-->
-    <!--{{ document.files | json }}-->
+  <npdc:persons></npdc:persons>
 
-    <section>
-      <h3>{{ 'Overview' | t }}</h3>
-      
-      <div ng-repeat="o in document.overview">
-        {{ lang.getNativeName(o['@language']) }} <span marked="o['@value']"></span>
-      </div>
-    </section>
+  <npdc:organisations></npdc:organisations>
 
-    <section>
+  <md-card>
+    <md-card-header>
+      <md-card-avatar>
+        <md-icon>label_outline</md-icon>
+      </md-card-avatar>
+      <md-card-header-text>
+        <span class="md-headline">{{'Classification' | t}}</span>
+        <span class="md-subhead">Programmes, topics, tags</span>
+      </md-card-header-text>
+    </md-card-header>
+    <md-card-content>
+      <section>
 
-      <h3>{{ 'Abstract' | t }}</h3>
-      <div ng-repeat="o in document.abstract">
-        <span lang="{{o['@language']}}" marked="{{ o['@value'] }}"></span>
-      </div>
-    </section>
-    
-    <npdc:links ng-if="security.hasSystem(resource.path) || document.license" links="links" related="related"></npdc:links>
-   
-    <section>
-      <npdc:organisations></npdc:organisations>
-    </section>
-
-    <section>
-      <h3>Details</h3>
-      <md-divider></md-divider>
       <div>
+
+
+        <p ng-if="document.programme.length > 0">
+          Programmes: <span ng-repeat="programme in document.programme"><a ng-href="?q=&filter-programme={{programme}}">{{ programme | t }}</a><span ng-if="!$last"> / </span></span>
+        </p>
+        <p ng-if="document.topics.length > 0">
+          Topics: <span ng-repeat="topic in document.topics"><a ng-href="?q=&filter-topics={{topic}}">{{ topic | t }}</a><span ng-if="!$last"> / </span></span>
+        </p>
+        <p ng-if="document.tags.length > 0">
+          Tags: <span ng-repeat="tag in document.tags"><a ng-href="?q=&filter-tags={{tag}}">{{ tag | t }}</a><span ng-if="!$last"> / </span></span>
+        </p>
+        <p ng-if="document.locations.length > 0">{{ 'Locations'|t }}: {{ document.locations | json }}
+        <!--<span ng-repeat="loc in document.locations">{{ loc.placename || loc.area }}, {{ loc.country }}.</span></p>-->
+
         <p ng-if="document.issn">ISSN: {{ document.issn | json }}</p>
         <p ng-if="document.issn">ISBN: {{ document.isbn | json }}</p>
 
-        <p ng-if="document.programme">
-          Programmes: <span ng-repeat="programme in document.programme"><a ng-href="?q=&filter-programme={{programme}}">{{ programme | t }}</a><span ng-if="!$last"> / </span></span>
-        </p>
-        <p ng-if="document.topics">
-          Topics: <span ng-repeat="topic in document.topics"><a ng-href="?q=&filter-topics={{topic}}">{{ topic | t }}</a><span ng-if="!$last"> / </span></span>
-        </p>
-        <p ng-if="document.tags">
-          Tags: <span ng-repeat="tag in document.tags"><a ng-href="?q=&filter-tags={{tag}}">{{ tag | t }}</a><span ng-if="!$last"> / </span></span>
-        </p>
-        <p ng-if="document.locations">{{ 'Locations'|t}}: <span ng-repeat="loc in document.locations">{{ loc.placename || loc.area }}, {{ loc.country }}.</span></p>
       </div>
     </section>
 
-    <npdc:document-meta></npdc:document-meta>
+    </md-card-content>
+  </md-card>
 
-  </div>
+  <md-card>
+    <md-card-header>
+      <md-card-avatar>
+        <md-icon>label_outline</md-icon>
+      </md-card-avatar>
+      <md-card-header-text>
+        <span class="md-headline">{{'Citation' | t}}</span>
+        <span class="md-subhead"></span>
+      </md-card-header-text>
+    </md-card-header>
+    <md-card-content>
+      <span><npdc:citation  citations="citations"></npdc:citation></span>
+    </md-card-content>
+  </md-card>
+
+  <npdc:metadata metadata="metadata" document="document"></npdc:metadata>
+
+    <!--<npdc:links related="related"></npdc:links>-->
+
 </div>
+<!--{{ romeo | json }}-->
