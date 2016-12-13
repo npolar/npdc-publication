@@ -3,7 +3,7 @@
 		"title": "Publication",
 		"fields": [{
 				"id": "title",
-				"title": "title [or paste a BibTeX reference]"
+				"title": "title"
 			},
 			"publication_type",
 			{

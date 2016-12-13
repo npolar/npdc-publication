@@ -163,8 +163,6 @@ function PublicationEditController($scope, $controller, $http, $location,
 
   });
 
-  //console.error(hashi);
-
   // Watch title and parse BibTeX if pasted
   /*
   $scope.$watch('formula.getModel().title', function(title, was) {
