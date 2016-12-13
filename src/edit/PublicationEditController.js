@@ -15,8 +15,8 @@ function PublicationEditController($scope, $controller, $http, $location,
   const unique = (arr) => [... new Set(arr)];
 
   const uniq = (arr, p='name') => {
-    return arr.filter((thing, index, self) => self.findIndex(t => t[p] === thing[p]) === index)
-  }
+    return arr.filter((thing, index, self) => self.findIndex(t => t[p] === thing[p]) === index);
+  };
 
   const schema = '//api.npolar.no/schema/publication-1';
   //const schema = 'edit/publication-1.json';
@@ -32,7 +32,7 @@ function PublicationEditController($scope, $controller, $http, $location,
         template: '<npdc:formula-person></npdc:formula-person>'
       }];
 
-    let i18n = []; /*{
+    /*let i18n = [{
         map: require('./en.json'),
         code: 'en'
       },
@@ -103,7 +103,7 @@ function PublicationEditController($scope, $controller, $http, $location,
     }, formula);
   }
 
-  function checkForDuplicates(title, id=$scope.formula.getModel().id) {
+  /*function checkForDuplicates(title, id=$scope.formula.getModel().id) {
     let query = {q: title, fields: 'id,title,doi,journal,people,publication_type,published,_score',
       score: true,
       limit:10
@@ -113,20 +113,20 @@ function PublicationEditController($scope, $controller, $http, $location,
     }
 
     Publication.array(query).$promise.then(r => {
-      let c = $scope.formula.getModel();
+      //let current = $scope.formula.getModel();
       let duplicates = r.filter(d => d._score > 1.2);
       if (duplicates.length > 0) {
         let m =  `Duplication warning [n=${duplicates.length}]`;
         console.log(m, duplicates);
 
-        /*console.log(`this:       ${c.id} ${c.published} ${c.publication_type} 1st author: ${(c.people||[]).find(p=> (p.roles||[]).includes('author')).last_name||'?'}`);
+        console.log(`this:       ${c.id} ${c.published} ${c.publication_type} 1st author: ${(c.people||[]).find(p=> (p.roles||[]).includes('author')).last_name||'?'}`);
         duplicates.forEach((d,i) => {
           console.log(`duplicate?: ${d.id} ${d.published} ${d.publication_type} 1st author: ${(d.people||[]).find(p=> (p.roles||[]).includes('author')).last_name||'?'} [score: ${d._score}]`);
-        });*/
+        });
         $scope.duplicates = true;
       }
     });
-  }
+  }*/
 
   init();
   initFileUpload($scope.formula);
@@ -217,8 +217,8 @@ function PublicationEditController($scope, $controller, $http, $location,
             p.people.forEach((cand,i) => {
               let idx = a.findIndex(person => {
                 return (
-                  (person.last_name === cand.last_name)
-                  && (person.first_name === cand.first_name || person.first_name[0] === cand.first_name[0])
+                  (person.last_name === cand.last_name) &&
+                  (person.first_name === cand.first_name || person.first_name[0] === cand.first_name[0])
                 );
               });
               if (idx >= 0) {
@@ -374,7 +374,7 @@ function PublicationEditController($scope, $controller, $http, $location,
           if (error.status === 404) {
             NpolarMessage.error(`DOI metadata missing for ${doi}`);
           } else {
-            console.error(`DOI API error ${error.status} ${error.statusText} for ${doiApiUri}`);
+            console.error(`DOI API error ${error.status} ${error.statusText} for ${doi}`);
             //NpolarMessage.error(`DOI API error ${error.status} ${error.statusText} for ${doiApiUri}`);
           }
 

@@ -3,7 +3,7 @@
 //  @todo Mv BibTeX out
 let bibtexParse = require('bibtex-parse-js');
 
-function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, NpdcBibTeX, NpdcAPA, Person, NpolarTranslate, NpolarMessage , NpolarApiSecurity) {
+function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, PublicationBibTeX, NpdcBibTeX, NpdcAPA, Person, NpolarTranslate, NpolarMessage , NpolarApiSecurity) {
   'ngInject';
 
   let self = this;

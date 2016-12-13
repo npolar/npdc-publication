@@ -49,7 +49,7 @@ function CrossrefWorks($http, NpolarMessage) {
             last_name: a.family,
             roles: ["author"],
             organisation
-          }
+          };
         });
         // @todo
         // add affs = >orgs
@@ -62,7 +62,7 @@ function CrossrefWorks($http, NpolarMessage) {
             last_name: a.family,
             roles: ["editor"],
             organisation
-          }
+          };
         });
         // @todo
         // add affs = >orgs

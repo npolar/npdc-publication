@@ -5,7 +5,7 @@ let xml2js = require('xml2js');
 module.exports = function SherpaRomeo($http, npolarApiConfig) {
   'ngInject';
 
-  let self = this;
+  //let self = this;
 
   const base = '//www.sherpa.ac.uk/romeo/api29.php';
 
@@ -22,7 +22,7 @@ module.exports = function SherpaRomeo($http, npolarApiConfig) {
           if (!err) {
             resolve(romeo);
           } else {
-            reject(e);
+            reject(err);
           }
         });
       }, (r) => {
