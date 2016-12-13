@@ -18,8 +18,8 @@ function PublicationEditController($scope, $controller, $http, $location,
     return arr.filter((thing, index, self) => self.findIndex(t => t[p] === thing[p]) === index)
   }
 
-  //const schema = '//api.npolar.no/schema/publication-1';
-  const schema = 'edit/publication-1.json';
+  const schema = '//api.npolar.no/schema/publication-1';
+  //const schema = 'edit/publication-1.json';
 
   function init() {
 
