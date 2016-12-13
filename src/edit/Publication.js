@@ -15,16 +15,18 @@ function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, Publicatio
 
   const uri = (p) => {
     if (!p) { return; }
-    let uri;
+
     if (p.doi) {
       return NpdcDOI.uri(p.doi);
-    } else if (uri = (p.links||[]).find(l => l.rel === 'publication' && l.href)) {
-      return uri.href;
+    }
+
+    let publicationLink = (p.links||[]).find(l => l.rel === 'publication' && l.href);
+    if (publicationLink) {
+      return publicationLink.href;
     } else {
       return `https://data.npolar.no/publication/${p.id}`;
     }
   };
-
 
   const citationMapper = (publication, param={style: 'apa'}) => {
     if (!publication) {
@@ -44,14 +46,13 @@ function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, Publicatio
     let type;
 
     let publisher = '';
-    //let publisher = pub.name || pub.id;
-    let p = publication.journal;
+
     if (publication.journal && publication.journal.name) {
       // Publisher is either journal
       publisher = publication.journal.name;
     } else {
       // or organisation with role publisher
-      NpdcCitationModel.publisher(publication).name;
+      publisher = NpdcCitationModel.publisher(publication).name;
     }
     // @todo append organisation[role=publisher] ?
 
