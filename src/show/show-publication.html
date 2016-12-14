@@ -48,10 +48,14 @@
 
       <section ng-if="document.files.length > 0">
         <div ng-repeat="file in document.files">
-          <!-- <span ng-show="!isOpen(document)"><md-icon title="protected: the provided link only works during your current login session">lock</md-icon></span> -->
-          <span><md-icon>file_download</md-icon></span>
-          <span>
+          <span ng-show="isDownloadable(document)">
+            <span><md-icon>file_download</md-icon></span>
             <a ng-href="{{ attachmentUri(file) }}">{{ file.filename}}</a> ({{ file.length | bytes }}) <!-- {{ file.type }} -->
+            <span ng-show="!isOpen(document)"><md-icon>lock<md-tooltip>Protected: this download link is keyed to your current login</md-tooltip></md-icon></span>
+
+          </span>
+           <span ng-show="!isDownloadable(document)">
+            <md-icon>lock<md-tooltip>Protected resource</md-tooltip></md-icon> {{ file.filename}} ({{ file.length | bytes }})
           </span>
         </div>
       </section>
@@ -121,6 +125,7 @@
         <p ng-if="document.locations.length > 0">{{ 'Locations'|t }}: {{ document.locations | json }}
         <!--<span ng-repeat="loc in document.locations">{{ loc.placename || loc.area }}, {{ loc.country }}.</span></p>-->
 
+        <p ng-if="document.license">License: {{ document.license}}</p>
         <p ng-if="document.issn">ISSN: {{ document.issn | json }}</p>
         <p ng-if="document.issn">ISBN: {{ document.isbn | json }}</p>
 
