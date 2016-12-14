@@ -30,6 +30,23 @@ function CrossrefWorks($http, NpolarMessage) {
         return 'peer-reviewed';
       }
 
+      function peopleMapper(a, roles) {
+
+        let organisation = JSON.stringify(a.affiliation.map(a => a.name)).split(/[\[\]\"]/).join('');
+
+        let affiliation = a.affiliation.map(a => {
+          return { '@id': null, name: a.name };
+        });
+
+        return { first_name: a.given,
+          last_name: a.family,
+          roles,
+          organisation,
+          affiliation
+        };
+      }
+
+
       let title='';
 
       if (m.title) {
@@ -43,32 +60,16 @@ function CrossrefWorks($http, NpolarMessage) {
       let p = { title, people: [], organisations: [], links: [] };
 
       if (m.author && m.author instanceof Array) {
-        p.people = m.author.map(a => {
-          let organisation = JSON.stringify(a.affiliation.map(a => a.name)).split(/[\[\]\"]/).join('');
-          return { first_name: a.given,
-            last_name: a.family,
-            roles: ["author"],
-            organisation
-          };
-        });
-        // @todo
-        // add affs = >orgs
+        p.people = m.author.map(a => peopleMapper(a, ["author"]));
+        // @todo add affs = >orgs
       }
 
       if (m.editor && m.editor instanceof Array) {
-        p.people = m.editor.map(a => {
-          let organisation = JSON.stringify(a.affiliation.map(a => a.name)).split(/[\[\]\"]/).join('');
-          // @todo
-          //let affiliation = a.affiliation.map(a => {
-          //  return { '@value': a.name, '@language': 'en'};
-          //});
-          return { first_name: a.given,
-            last_name: a.family,
-            roles: ["editor"],
-            organisation//,
-            //affiliation
-          };
-        });
+        if (!p.people) {
+          p.people = [];
+        }
+        p.people = p.people.concat(m.editor.map(ed => peopleMapper(ed, ["editor"])));
+        // @todo merge auths/eds
         // @todo
         // add affs = >orgs
       }
