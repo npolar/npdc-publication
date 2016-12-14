@@ -11,6 +11,7 @@ function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, Publicatio
   const schema = 'http://api.npolar.no/schema/publication-1';
   const PROGRAMME_ECOTOXICOLOGY = 'Environmental pollutants';
   const PROGRAMME_BIODIVERSITY = 'Biodiversity';
+  const PROGRAMME_OCEANS_AND_SEAICE = 'Oceans and sea ice';
   // Oceans and sea ice (184) Geology and geophysics (139) ICE Fluxes (76) ICE Ecosystems (38) ICE Antarctica (29) N-ICE2015 (27) N-ICE (17) ICE (10) Environmental management (6) Fram Strait (1)
 
   const uri = (p) => {
@@ -88,7 +89,7 @@ function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, Publicatio
     } else if ((/biodiv|okosystemer|bio/).test(o)) {
       return PROGRAMME_BIODIVERSITY;
     } else if ((/havkryo|havis/).test(o)) {
-      return 'Oceans and sea ice';
+      return PROGRAMME_OCEANS_AND_SEAICE;
     } else if ((/geo/).test(o)) {
       return 'Geology and geophysics';
     }
@@ -97,6 +98,9 @@ function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, Publicatio
   const topicFromProgramme = (programme) => {
     if (PROGRAMME_ECOTOXICOLOGY === programme) {
       return 'ecotoxicology';
+    }
+    if (PROGRAMME_OCEANS_AND_SEAICE === programme) {
+      return 'oceanography';
     }
   };
 
@@ -246,23 +250,7 @@ function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, Publicatio
     },
 
     preParseBibTeX(text) {
-      /*['TITLE', 'DOI', 'AUTHOR', 'JOURNAL', 'VOLUME', 'URL', 'YEAR', 'NUMBER'].forEach(tag => {
-         text = text.replace(tag, tag.toLowerCase());
-      });*/
-
-   /*
-      AUTHOR = {Drews, R. and Brown, J. and Matsuoka, K. and Witrant, E. and Philippe, M. and Hubbard, B. and Pattyn, F.},
-TITLE = {Constraining variable density of ice shelves using wide-angle radar measurements},
-JOURNAL = {The Cryosphere},
-VOLUME = {10},
-YEAR = {2016},
-NUMBER = {2},
-PAGES = {811--823},
-URL = {http://www.the-cryosphere.net/10/811/2016/},
-DOI = {10.5194/tc-10-811-2016}
-}*/
-
-      return text; //.toLowerCase();
+      return text;
     },
 
     parseBibTeX(text) {
@@ -281,7 +269,7 @@ DOI = {10.5194/tc-10-811-2016}
     },
 
     fileObject: function(hashi) {
-      
+
       return {
         uri: hashi.url,
         filename: hashi.filename,
