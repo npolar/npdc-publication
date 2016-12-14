@@ -26,6 +26,10 @@
 				"id": "conference",
 				"condition": "publication_type == 'poster' || publication_type == 'abstract'"
 			},
+			{
+				"id": "publication_lang",
+				"title": "language of the publication"
+			},
 			"volume",
 			"issue", {
 				"id": "art_no",
@@ -80,9 +84,6 @@
 	}, {
 		"title": "Classification",
 		"fields": [{
-				"id": "publication_lang",
-				"title": "language of the publication"
-			}, {
 				"id": "topics",
 				"title": "topics: used by the NPI web site (http://npolar.no)",
 				"type": "array"
@@ -92,7 +93,8 @@
 				"title": "programmes: used for reporting"
 			},
 			{
-				"id": "research_stations"
+				"id": "research_stations",
+				"title": "resarch stations: used for reporting"
 			},
 			{
 				"id": "locations",
@@ -100,7 +102,7 @@
 					"fields": ["placename", "area", "!country", "!hemisphere", "!latitude"]
 				}
 			},
-			"tags",
+			{ "id": "tags", "title": "tags: any keyword, but no need to repeat words already in the text"},
 			"draft",
 			"state", {
 				"id": "comment",

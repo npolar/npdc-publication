@@ -52,7 +52,6 @@
             <span><md-icon>file_download</md-icon></span>
             <a ng-href="{{ attachmentUri(file) }}">{{ file.filename}}</a> ({{ file.length | bytes }}) <!-- {{ file.type }} -->
             <span ng-show="!isOpen(document)"><md-icon>lock<md-tooltip>Protected: this download link is keyed to your current login</md-tooltip></md-icon></span>
-
           </span>
            <span ng-show="!isDownloadable(document)">
             <md-icon>lock<md-tooltip>Protected resource</md-tooltip></md-icon> {{ file.filename}} ({{ file.length | bytes }})

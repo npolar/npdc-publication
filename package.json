@@ -11,7 +11,7 @@
   "private": true,
   "repository": "https://github.com/npolar/npdc-publication",
   "dependencies": {
-    "npdc-common": "npolar/npdc-common#v4.7.4",
+    "npdc-common": "npolar/npdc-common#v4.7.5",
     "xml2js": "*",
     "bibtex-parse-js": "*"
   },
