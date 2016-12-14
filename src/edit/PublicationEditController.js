@@ -4,7 +4,6 @@
 // @todo check/remove unused deps (jshint setting)
 // @todo bottomSheetOptions => find NPOLAR people? lookup DOI?
 
-let xml2js = require('xml2js');
 
 function PublicationEditController($scope, $controller, $http, $location,
   formula, formulaAutoCompleteService, fileFunnelService, npolarCountryService,
@@ -135,28 +134,16 @@ function PublicationEditController($scope, $controller, $http, $location,
   $scope.edit().$promise.then(p => {
 
     if (p.topics === ['other'] && p.programme.length > 0) {
-      p.topics = [Publication.topicFromProgramme(p.programme[0])];
-      $scope.formula.setModel(p);
+
+      p.topics = p.programme.map(prg => Publication.topicFromProgramme(prg));
+      console.log('topics',p.topics);
+      //$scope.formula.setModel(p);
     }
 
 
     if (p.journal && p.journal.name) {
       SherpaRomeo.jtitle(p.journal.name);
-      //  // http://sherpa.ac.uk/romeo/apimanual.php?la=en
-      $http.get(`http://www.sherpa.ac.uk/romeo/api29.php?ak=4JiApGee7Js&jtitle=${p.journal.name}&qtype=contains`).then(r => {
-        let xml = r.data;
-        xml2js.parseString(xml, (err,romeo) => {
-          if (!err) {
-            $scope.romeo = romeo;
-            console.log('romeo', romeo);
-          }
-
-        });
-
-
-      }, (e) => {
-        console.error(e);
-      });
+      // http://sherpa.ac.uk/romeo/apimanual.php?la=en
     }
 
 
@@ -242,8 +229,10 @@ function PublicationEditController($scope, $controller, $http, $location,
 
   };
 
+  // todo move into button and create method for it
   $scope.$watch('formula.getModel().doi', function(doi, was) {
 
+  console.log('doi', doi, 'was', was);
     if (NpdcDOI.isDOI(doi)) {
 
       let p = $scope.formula.getModel(); // p => publication (currently being edited)
@@ -251,6 +240,8 @@ function PublicationEditController($scope, $controller, $http, $location,
       if (!p.id) {
         p = Object.assign({}, Publication.create(),p);
       }
+
+
 
       // Check for DOI duplicates
       // FIXME @todo Do not split once publication/doi tokenization is removed on indexing
@@ -285,20 +276,21 @@ function PublicationEditController($scope, $controller, $http, $location,
         let m = r.data.message; // m => DOI metadata
 
         if (!p._rev) {
-          NpolarMessage.info(`doi:${doi} found`);
+          NpolarMessage.info(`doi:${doi} metadata found`);
         }
 
-        console.log('DOI metadata', m);
+        console.log('crossref.org DOI message', m);
 
         let npolarPublication = CrossrefWorks.npolarPublication(m);
 
-        if (true || !p.title) {
+        console.log('npolarPublication from crossref.org DOI message', npolarPublication);
+
+        if (!p.title) {
 
           // Keep existing organisations and tags
-          // @todo Existing people are updated with affiliation and (if provided) full first name
           let organisations = p.organisations||[];
           let tags = p.tags||[];
-          let people = p.people||[];
+          let people = npolarPublication.people;
 
           p = Object.assign({}, p, npolarPublication);
           p.organisations = uniq(organisations.concat(npolarPublication.organisations), 'name');
@@ -308,17 +300,19 @@ function PublicationEditController($scope, $controller, $http, $location,
           p.issn = unique(p.issn);
           p.pages = unique(p.pages);
           p.links = unique(p.links||[]);
+          // @todo remeove links to doi.org?
           p.title = p.title.trim();
-          if (people.length > 1 && people.length === p.people.length) {
-            // Update people if more than 1
-            p.people = people;
-          }
+          //if (people.length > 1 && people.length === p.people.length) {
+          //  // Update people if more than 1
+          //  p.people = people;
+          //}
+          p.people = people;
           delete p.$resolved;
 
           console.log('p -> setModel', p);
           $scope.formula.setModel(p);
 
-          if (!people.find(person => person.organisation === 'npolar.no')) {
+          if (!p.people.find(person => person.organisation === 'npolar.no')) {
             $scope.findNpolarAuthorsAndUpdateFormulaModel(p);
           }
 
