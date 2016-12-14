@@ -17,6 +17,17 @@ function PublicationShowController($anchorScroll, $controller, $location, $route
     return Publication.isOpen(publication);
   };
 
+  $scope.isDownloadable = (publication) => {
+    let isOpen = Publication.isOpen(publication);
+    if (true === isOpen) {
+      return true;
+    }
+    if ($scope.security.hasSystem($scope.resource.path)) {
+      return true;
+    }
+    return false;
+  };
+
   $scope.license = 'cc-by';
 
   $scope.attachmentUri = (file) => {
