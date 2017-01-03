@@ -3,7 +3,7 @@
 //  @todo Mv BibTeX out
 let bibtexParse = require('bibtex-parse-js');
 
-function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, PublicationBibTeX, NpdcBibTeX, NpdcAPA, Person, NpolarTranslate, NpolarMessage , NpolarApiSecurity) {
+function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, PublicationBibTeX, NpdcBibTeX, NpdcAPA, Person, NpolarTranslate, NpolarMessage, NpolarApiSecurity) {
   'ngInject';
 
   let self = this;
@@ -12,7 +12,7 @@ function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, Publicatio
   const PROGRAMME_ECOTOXICOLOGY = 'Environmental pollutants';
   const PROGRAMME_BIODIVERSITY = 'Biodiversity';
   const PROGRAMME_OCEANS_AND_SEAICE = 'Oceans and sea ice';
-  // Oceans and sea ice (184) Geology and geophysics (139) ICE Fluxes (76) ICE Ecosystems (38) ICE Antarctica (29) N-ICE2015 (27) N-ICE (17) ICE (10) Environmental management (6) Fram Strait (1)
+  const PROGRAMME_GEOLOGY_AND_GEOPHYSICS = 'Geology and geophysics';
 
   const uri = (p) => {
     if (!p) { return; }
@@ -46,15 +46,22 @@ function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, Publicatio
     let title = publication.title;
     let type;
 
-    let publisher = '';
+    let publisher = NpdcCitationModel.publisher(publication);
+    let publicationName = '';
+
 
     if (publication.journal && publication.journal.name) {
-      // Publisher is either journal
-      publisher = publication.journal.name;
+      if (publisher && publisher.name) {
+        publisher = `${publisher.name}. ${publication.journal.name}`;
+      } else {
+        publisher = publication.journal.name;
+      }
+    } else if (publisher.name) {
+      publisher = publisher.name;
     } else {
-      // or organisation with role publisher
-      publisher = NpdcCitationModel.publisher(publication).name;
+      publisher = '';
     }
+    console.log('publisher', publisher);
     // @todo append organisation[role=publisher] ?
 
     let uri2 = uri(publication);
@@ -84,15 +91,16 @@ function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, Publicatio
   // bio (1)
   const programmeFromOrgtree = (orgtree) => {
     let o = JSON.stringify(orgtree);
-    if ((/(miljogift|data)/).test(o)) {
+    if ((/(miljogift)/).test(o)) {
       return PROGRAMME_ECOTOXICOLOGY;
-    } else if ((/biodiv|okosystemer|bio/).test(o)) {
+    } else if ((/(biodiv|okosystemer|bio)/).test(o)) {
       return PROGRAMME_BIODIVERSITY;
-    } else if ((/havkryo|havis/).test(o)) {
+    } else if ((/(havkryo|havis)/).test(o)) {
       return PROGRAMME_OCEANS_AND_SEAICE;
-    } else if ((/geo/).test(o)) {
-      return 'Geology and geophysics';
+    } else if ((/(geo)/).test(o)) {
+      return PROGRAMME_GEOLOGY_AND_GEOPHYSICS;
     }
+    return null;
   };
 
   const topicFromProgramme = (programme) => {
@@ -102,6 +110,7 @@ function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, Publicatio
     if (PROGRAMME_OCEANS_AND_SEAICE === programme) {
       return 'oceanography';
     }
+    return null;
   };
 
   return Object.assign(PublicationResource, {
@@ -190,11 +199,12 @@ function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, Publicatio
       let organisation = 'npolar.no';
       let collection = 'publication';
       let publication_type = 'other';
-      let topics = ['other'];
+      let topics = [];
       let title = null;
       let published = new Date().getFullYear();
       let publication_lang = 'en';
-      let programme;
+      let programme = [];
+      let homepage;
       //let locations = [{ country: 'NO'}];
 
       if (NpolarApiSecurity.isAuthenticated()) {
@@ -204,10 +214,21 @@ function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, Publicatio
         let [first_name,last_name] = user.name.split(' ');
         organisation = user.email.split('@')[1];
         let affiliation = [{ '@id': organisation }];
-        person = { id, roles: ['author'], first_name, last_name, email, organisation, affiliation };
+        if ('npolar.no' === organisation) {
+          homepage = `http://www.npolar.no/en/people/${user.email.split('@')[0]}`;
+        }
+        person = { id, roles: ['author'], first_name, last_name, email, organisation, affiliation, homepage };
 
-        programme = [programmeFromOrgtree(user.orgtree)];
-        topics = [topicFromProgramme(programme[0])];
+        if (user.orgtree) {
+          let prg = programmeFromOrgtree(user.orgtree);
+          if (prg && prg instanceof String && prg.length > 0) {
+            programme = [prg];
+          }
+        }
+        let topic = topicFromProgramme(programme[0]);
+        if (topic && topic instanceof String && topic.length > 0) {
+          topics = [topic];
+        }
         people = [person];
       } else {
         people = [];

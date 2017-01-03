@@ -210,6 +210,11 @@ function PublicationEditController($scope, $controller, $http, $location,
               });
               if (idx >= 0) {
                 found += 1;
+
+                if (cand.email) {
+                  cand.homepage = 'http://www.npolar.no/en/people/' + cand.email.split('@')[0];
+                }
+
                 p.people[i] = Object.assign(cand, a[idx]);
                 console.debug('Found', p.people[i], found);
               }
@@ -217,7 +222,7 @@ function PublicationEditController($scope, $controller, $http, $location,
 
             if (found > 0) {
               if (found > was) {
-                NpolarMessage.info(`Added email and organisation npolar.no for ${found} NPI employee(s)`);
+                NpolarMessage.info(`Found ${found} NPI employee(s)`);
                 $scope.formula.setModel(p);
               }
 

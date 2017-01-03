@@ -14,7 +14,6 @@
 				"id": "published",
 				"title": "published: when was the earliest version of record available? (date, or year-month, or year)"
 			}
-
 		]
 	}, {
 		"title": "Details",
@@ -85,12 +84,12 @@
 		"title": "Classification",
 		"fields": [{
 				"id": "topics",
-				"title": "topics: used by the NPI web site (http://npolar.no)",
+				"title": "topics: for integrating with http://npolar.no",
 				"type": "array"
 			},
 			{
 				"id": "programme",
-				"title": "programmes: used for reporting"
+				"title": "programmes: which programmes were involved in producing the publication?"
 			},
 			{
 				"id": "research_stations",
