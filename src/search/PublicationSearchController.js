@@ -6,23 +6,22 @@ var PublicationSearchController = function (
   'ngInject';
 
   function query() {
-    let defaults = {
-      limit: $location.search().limit || 50,
+    let param = $location.search();
+    let query = {
+      limit: param.limit || 50,
       fields: 'title,id,updated,publication_type,published,journal,people,organisations',
-      facets: 'publication_type,state,topics,journal.name,people.email,license',
+      facets: param.facets || 'publication_type,programme,topics,journal.name,people.email,organisations.id,organisations.roles,created_by,updated_by',
+      sort: param.sort || '-created',
       score: true
     };
 
-    if (!$location.search().sort) {
-      if ($location.search().q) {
-        defaults.sort = "-published,-updated,publication_type";
-      } else {
-        defaults.sort = "-updated,-published,publication_type";
+    if (!param.sort) {
+      if (param.q && param.q !== '') {
+        delete query.sort;
       }
     }
-
-    let invariants = $scope.security.isAuthenticated() ? {} : { "not-draft": "yes" } ;
-    return Object.assign({}, defaults, invariants);
+    console.log('query', query);
+    return query;
   }
 
   function init() {
