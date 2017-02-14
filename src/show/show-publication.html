@@ -51,10 +51,10 @@
           <span ng-show="isDownloadable(document)">
             <span><md-icon>file_download</md-icon></span>
             <a ng-href="{{ attachmentUri(file) }}">{{ file.filename}}</a> ({{ file.length | bytes }}) <!-- {{ file.type }} -->
-            <span ng-show="!isOpen(document)"><md-icon>lock<md-tooltip>Protected: this download link is keyed to your current login</md-tooltip></md-icon></span>
+            <span ng-show="!isOpen(document)"><md-icon>lock<md-tooltip>Protected resource, only available for authorized users (notice that this link cannot be shared, it's tied to your current login token)</md-tooltip></md-icon></span>
           </span>
            <span ng-show="!isDownloadable(document)">
-            <md-icon>lock<md-tooltip>Protected resource</md-tooltip></md-icon> {{ file.filename}} ({{ file.length | bytes }})
+            <md-icon>lock<md-tooltip>Protected resource: only available to authorized users</md-tooltip></md-icon> {{ file.filename}} ({{ file.length | bytes }})
           </span>
         </div>
       </section>
