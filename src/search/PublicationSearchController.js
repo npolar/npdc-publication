@@ -8,7 +8,7 @@ var PublicationSearchController = function (
   function query() {
     let param = $location.search();
     let query = {
-      limit: param.limit || 25,
+      limit: param.limit || 20,
       fields: 'title,id,updated,publication_type,published,journal,people,organisations',
       facets: param.facets || 'publication_type,programme,topics,journal.name,people.email,organisations.id,organisations.roles,created_by,updated_by',
       sort: param.sort || '-created',
