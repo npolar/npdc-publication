@@ -64,14 +64,14 @@ npdcPublicationApp.filter('published', () => {
 npdcPublicationApp.config(($httpProvider, npolarApiConfig) => {
   let environment = 'production';
   let autoconfig = new AutoConfig(environment);
-  let romeo = { key: '4JiApGee7Js' };
-  angular.extend(npolarApiConfig, autoconfig, { romeo }, { resources });
+  let romeo = { key: '' };
+  Object.assign(npolarApiConfig, autoconfig, { romeo }, { resources });
 
   $httpProvider.interceptors.push('npolarApiInterceptor');
-  //$httpProvider.interceptors.push('xmlHttpInterceptor');
 });
 
 // Inject npolarApiConfig and run
 npdcPublicationApp.run((npolarApiConfig, npdcAppConfig, NpolarTranslate) => {
+  npdcAppConfig.help = { uri: 'https://github.com/npolar/npdc-publication/wiki' };
   NpolarTranslate.loadBundles('npdc-publication');
 });
