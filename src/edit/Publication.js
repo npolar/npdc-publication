@@ -168,7 +168,7 @@ function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, Publicatio
         //Other (339) NP Report Series (66) Meddelelser (32) NP Brief Report Series (23) Skrifter (11) Thematic (11) o (1)
       }
 
-      let open = false;
+      let open = true;
       /*if (p.organisations && p.organisations instanceof Array && p.organisations.length > 0) {
         //code
       }*/
