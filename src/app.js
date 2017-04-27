@@ -66,7 +66,6 @@ npdcPublicationApp.config(($httpProvider, npolarApiConfig) => {
   let autoconfig = new AutoConfig(environment);
   let romeo = { key: '' };
   Object.assign(npolarApiConfig, autoconfig, { romeo }, { resources });
-
   $httpProvider.interceptors.push('npolarApiInterceptor');
 });
 

@@ -135,14 +135,14 @@ function PublicationEditController($scope, $controller, $http, $location,
 
     if (p.topics === ['other'] && p.programme.length > 0) {
 
-      p.topics = p.programme.map(prg => Publication.topicFromProgramme(prg));
-      console.log('topics',p.topics);
+      //p.topics = p.programme.map(prg => Publication.topicFromProgramme(prg));
+      //console.log('topics',p.topics);
       //$scope.formula.setModel(p);
     }
 
 
     if (p.journal && p.journal.name) {
-      SherpaRomeo.jtitle(p.journal.name);
+      //SherpaRomeo.jtitle(p.journal.name);
       // http://sherpa.ac.uk/romeo/apimanual.php?la=en
     }
 
