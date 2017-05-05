@@ -93,9 +93,9 @@ function PublicationEditController($scope, $controller, $http, $location,
       },
       server,
       multiple: true,
-      /*restricted: function () {
+      restricted: function () {
         return false;
-      },*/
+      },
       fileToValueMapper: Publication.fileObject,
       valueToFileMapper: Publication.hashiObject,
       fields: ['uri'] //'type', 'hash',
@@ -133,18 +133,18 @@ function PublicationEditController($scope, $controller, $http, $location,
   // edit (or new) action
   $scope.edit().$promise.then(p => {
 
-    if (p.topics === ['other'] && p.programme.length > 0) {
-
+    console.log(p);
+    // if (p.topics === ['other'] && p.programme.length > 0) {
       //p.topics = p.programme.map(prg => Publication.topicFromProgramme(prg));
       //console.log('topics',p.topics);
       //$scope.formula.setModel(p);
-    }
+    //}
 
 
-    if (p.journal && p.journal.name) {
+    //if (p.journal && p.journal.name) {
       //SherpaRomeo.jtitle(p.journal.name);
       // http://sherpa.ac.uk/romeo/apimanual.php?la=en
-    }
+    //}
 
 
 
