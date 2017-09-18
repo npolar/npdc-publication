@@ -189,9 +189,9 @@ function PublicationEditController($scope, $controller, $http, $location,
       // Find and set npolar.no employees
       if ((p.people||[]).length > 0) {
 
-        let qLastName = p.people.map(p => p.last_name).join(',');
+        let qLastName = p.people.map(p => p.last_name).join('|');
 
-        Person.array({q:null, 'q-last_name': qLastName,
+        Person.array({q:'', 'filter-last_name': qLastName,
           fields: 'first_name,last_name,email,organisation',
           //'filter-currently_employed': true,
           'filter-organisation':'npolar.no', // hmm does not work with filter-people.organisation?
