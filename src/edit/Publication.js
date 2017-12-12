@@ -201,7 +201,7 @@ function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, Publicatio
       let publication_type = 'other';
       let topics = [];
       let title = null;
-      let published = new Date().getFullYear();
+      let published = String(new Date().getFullYear());
       let publication_lang = 'en';
       let programme = [];
       let homepage;
