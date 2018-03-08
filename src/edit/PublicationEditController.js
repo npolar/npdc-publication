@@ -17,7 +17,7 @@ function PublicationEditController($scope, $controller, $http, $location,
     return arr.filter((thing, index, self) => self.findIndex(t => t[p] === thing[p]) === index);
   };
 
-  const schema = '//api.npolar.no/schema/publication-1';
+  const schema = 'https://api.npolar.no/schema/publication-1';
   //const schema = 'edit/publication-1.json';
 
   function init() {
@@ -313,8 +313,9 @@ function PublicationEditController($scope, $controller, $http, $location,
           //}
           p.people = people;
           delete p.$resolved;
+          delete p.$promise;
 
-          console.log('p -> setModel', p);
+          console.log('p -> setModel', JSON.stringify(p));
           $scope.formula.setModel(p);
 
           if (!p.people.find(person => person.organisation === 'npolar.no')) {
