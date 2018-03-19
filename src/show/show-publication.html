@@ -40,7 +40,7 @@
       <h2 class="md-headline" ng-if="authors.length > 0"><npdc:authors authors="authors"></npdc:authors></h2>
 
       <div ng-if="coauthors.length > 0">Co-authored by <npdc:authors authors="coauthors"></npdc:authors></div>
-      <!-- <div ng-if="editors.length" class="md-subhead">Edited by <span ng-repeat="name in names(editors)">{{name}}<span ng-if="!$last">,</span> </span></div> -->
+      <div ng-if="editors.length" class="md-subhead">Edited by <span ng-repeat="name in names(editors)">{{name}}<span ng-if="!$last">,</span> </span></div>
 
       <div ng-if="document.conference" ng-init="c = document.conference">
         <p>Presented at: {{ c.name }}, {{ c.place }}, {{c.country }} ({{ c.dates[0].split('T')[0]}} — {{c.dates[1].split('T')[0]}})</p>
