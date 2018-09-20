@@ -249,12 +249,12 @@ function PublicationEditController($scope, $controller, $http, $location,
 
 
       // Check for DOI duplicates
-      // FIXME @todo Do not split once publication/doi tokenization is removed on indexing
       Publication.array({
         'not-id': p.id,
-        'q-doi': doi.split('/')[1],
+        'filter-doi': doi,
         fields: 'id,title,doi',
-        q: null
+        q: null,
+        limit: 10
         }).$promise.then(arr => {
 
         if (arr && arr.length > 0) {
