@@ -246,32 +246,6 @@ function PublicationEditController($scope, $controller, $http, $location,
         p = Object.assign({}, Publication.create(),p);
       }
 
-
-
-      // Check for DOI duplicates
-      Publication.array({
-        'not-id': p.id,
-        'filter-doi': doi,
-        fields: 'id,title,doi',
-        q: null,
-        limit: 10
-        }).$promise.then(arr => {
-
-        if (arr && arr.length > 0) {
-          let dup = arr[0];
-          if (dup.doi === doi) {
-            $scope.duplicates = arr;
-            let title = dup.title;
-            NpolarMessage.error(`Duplicate DOI ${doi}`);
-            $scope.formula.setModel(Object.assign(p, {
-              publication_type: 'duplicate',
-              title: `DOI:${doi} is already linked in publication id ${dup.id} ["${title}"]`, doi: doi.split('/')[0]
-            }));
-            return;
-          }
-        }
-      });
-
       // Get DOI metadata
       CrossrefWorks.get(doi).then(r => {
         if (!r.data.message) {
@@ -366,7 +340,30 @@ function PublicationEditController($scope, $controller, $http, $location,
         p.organisations = unique(p.organisations);
        */
 
+       // Check for DOI duplicates
+       Publication.array({
+         'not-id': p.id,
+         'filter-doi': doi,
+         fields: 'id,title,doi',
+         q: null,
+         limit: 10
+         }).$promise.then(arr => {
 
+         if (arr && arr.length > 0) {
+           let dup = arr[0];
+           if (dup.doi === doi) {
+             $scope.duplicates = arr;
+             let title = dup.title;
+             NpolarMessage.error(`Duplicate DOI ${doi}`);
+             $scope.formula.setModel(Object.assign(p, {
+               doi: '',
+               publication_type: 'duplicate',
+               title: `DOI:${doi} is already linked in publication id ${dup.id} ["${title}"]`
+             }));
+             return;
+           }
+         }
+       });
 
 
 
@@ -380,6 +377,10 @@ function PublicationEditController($scope, $controller, $http, $location,
 
         });
       }
+
+
+
+
     });
 
 
