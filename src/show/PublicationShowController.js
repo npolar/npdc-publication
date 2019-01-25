@@ -1,7 +1,7 @@
 'use strict';
 
 function PublicationShowController($anchorScroll, $controller, $location, $routeParams, $scope, $sce, $q, $http, $mdDialog,
-  NpolarLang, NpolarApiSecurity, npdcAppConfig, NpdcCitationModel, SherpaRomeo,
+  NpolarLang, NpolarApiSecurity, npdcAppConfig, NpdcCitationModel,
   Dataset, Project, Publication) {
 
   'ngInject';
@@ -76,11 +76,11 @@ function PublicationShowController($anchorScroll, $controller, $location, $route
 
       $scope.citation = $scope.citations[0];
 
-      if (publication.journal && publication.journal.name) {
-        SherpaRomeo.jtitle(publication.journal.name).then(romeo => {
-          $scope.romeo = { publisher: romeo.romeoapi.publishers[0].publisher };
-        });
-      }
+      // if (publication.journal && publication.journal.name) {
+      //   SherpaRomeo.jtitle(publication.journal.name).then(romeo => {
+      //     $scope.romeo = { publisher: romeo.romeoapi.publishers[0].publisher };
+      //   });
+      // }
 
       if (publication.people instanceof Array) {
         $scope.authors = publication.people.filter(p => ( (p.roles||[]).includes('author')) );

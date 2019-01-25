@@ -3,7 +3,8 @@
 //  @todo Mv BibTeX out
 let bibtexParse = require('bibtex-parse-js');
 
-function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, PublicationBibTeX, NpdcBibTeX, NpdcAPA, Person, NpolarTranslate, NpolarMessage, NpolarApiSecurity) {
+function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, PublicationBibTeX, NpdcBibTeX, NpdcAPA, Person,
+   NpolarTranslate, NpolarMessage, NpolarApiSecurity) {
   'ngInject';
 
   let self = this;
@@ -148,7 +149,7 @@ function Publication(NpdcDOI, NpdcCitationModel, PublicationResource, Publicatio
       return {
         uri:id,
         path,
-        formats: [{ href: `//api.npolar.no/publication/${publication.id}`, title: "JSON", type: "application/json"}],
+        formats: [{ href: `https://api.npolar.no/publication/${publication.id}`, title: "JSON", type: "application/json"}],
         editors: [],
         byline,
         schema
