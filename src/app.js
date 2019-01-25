@@ -7,7 +7,7 @@ let npdcPublicationApp = angular.module('npdcPublicationApp', ['npdcCommon']);
 
 npdcPublicationApp.factory('PublicationBibTeX', require('./PublicationBibTeX'));
 npdcPublicationApp.factory('CrossrefWorks', require('./CrossrefWorks'));
-npdcPublicationApp.factory('SherpaRomeo', require('./SherpaRomeo'));
+//npdcPublicationApp.factory('SherpaRomeo', require('./SherpaRomeo'));
 npdcPublicationApp.factory('Publication', require('./edit/Publication'));
 
 npdcPublicationApp.controller('PublicationShowController', require('./show/PublicationShowController'));
@@ -62,10 +62,9 @@ npdcPublicationApp.filter('published', () => {
 
 // API HTTP interceptor
 npdcPublicationApp.config(($httpProvider, npolarApiConfig) => {
-  let environment = 'production';
+  let environment; // = 'test';
   let autoconfig = new AutoConfig(environment);
-  let romeo = { key: '' };
-  Object.assign(npolarApiConfig, autoconfig, { romeo }, { resources });
+  Object.assign(npolarApiConfig, autoconfig, { resources });
   $httpProvider.interceptors.push('npolarApiInterceptor');
 });
 
