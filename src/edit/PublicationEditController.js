@@ -6,7 +6,7 @@
 function PublicationEditController($scope, $controller, $http, $location,
   formula, formulaAutoCompleteService, fileFunnelService, npolarCountryService,
   npolarApiConfig, NpolarMessage, NpolarApiSecurity, NpolarLang,
-  npdcAppConfig, NpdcDOI, CrossrefWorks, SherpaRomeo, Publication, Person) {
+  npdcAppConfig, NpdcDOI, CrossrefWorks, Publication, Person) {
   'ngInject';
 
   const unique = (arr) => [... new Set(arr)];
