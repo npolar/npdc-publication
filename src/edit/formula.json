@@ -1,130 +1,184 @@
 {
-	"fieldsets": [{
-		"title": "Publication",
-		"fields": [{
-				"id": "title",
-				"title": "title"
-			},
-			{
-				"id": "doi",
-				"title": "DOI [will fetch metadata from crossref.org (if no title is set)]"
-			},
-			"publication_type",
-			{
-				"id": "published",
-				"title": "published: when was the earliest version of record available? (date, or year-month, or year)"
-			}
-		]
-	}, {
-		"title": "Details",
-		"fields": [{
-				"id": "journal",
-				"fields": ["!id", "!np_series", "!series", "!series_no"],
-				"condition": "publication_type != 'book' && publication_type != 'map' && publication_type != 'poster' && publication_type != 'abstract'"
-			}, {
-				"id": "conference",
-				"condition": "publication_type == 'poster' || publication_type == 'abstract'"
-			},
-			{
-				"id": "publication_lang",
-				"title": "language of the publication"
-			},
-			"volume",
-			"issue", {
-				"id": "art_no",
-				"title": "article no"
-			}, {
-				"id": "suppl",
-				"title": "supplement"
-			}, {
-				"id": "page_count",
-				"title": "total number of pages"
-			}, {
-				"id": "pages",
-				"title": "OR from page to page"
-			},
-			"issn",
-			"isbn"
-		]
-	}, {
-		"title": "People",
-		"fields": [{
-			"id": "people",
-			"fields": ["!id"]
-		}]
-	}, {
-		"title": "Organisations",
-		"fields": ["organisations"]
-	}, {
-		"title": "Texts",
-		"fields": [{
-			"id": "abstract",
-			"items": {
-				"fields": [{
-					"id": "@language",
-					"default": "en"
-				}, {
-					"id": "@value",
-					"type": "textarea"
-				}]
-			}
-		}, {
-			"id": "overview",
-			"items": {
-				"fields": [{
-					"id": "@language",
-					"default": "nb"
-				}, {
-					"id": "@value",
-					"type": "textarea"
-				}]
-			}
-		}]
-	}, {
-		"title": "Classification",
-		"fields": [{
-				"id": "topics",
-				"title": "topics: for integrating with http://npolar.no",
-				"type": "array"
-			},
-			{
-				"id": "programme",
-				"title": "programmes/sections: which programmes/sections were involved in producing the publication?"
-			},
-			{
-				"id": "research_stations",
-				"title": "resarch stations: used for reporting"
-			},
-			{
-				"id": "locations",
-				"items": {
-					"fields": ["placename", "area", "!country", "!hemisphere", "!latitude"]
-				}
-			},
-			{ "id": "tags", "title": "tags: any keyword, but no need to repeat words already in the text"},
-			"draft",
-			"state", {
-				"id": "comment",
-				"type": "textarea"
-			}
-		]
-	}, {
-		"title": "Links",
-		"fields": [{ "id": "links", "fields": [{"id": "rel", "enum": ["a","b"]}]}]
-	}, {
-		"title": "Files",
-
-		"fields": [{
-			"id": "license",
-			"items": {"enum": [
-				null,
-				"http://creativecommons.org/publicdomain/mark/1.0/",
-				"http://creativecommons.org/publicdomain/zero/1.0/",
-				"http://creativecommons.org/licenses/by-nc-nd/4.0/",
-				"http://creativecommons.org/licenses/by/3.0/",
-				"http://creativecommons.org/licenses/by/4.0/"
-			]
-			}
-		}, "files"]
-	}]
+  "fieldsets": [
+    {
+      "title": "Publication",
+      "fields": [
+        {
+          "id": "title",
+          "title": "title"
+        },
+        {
+          "id": "doi",
+          "title": "DOI [will fetch metadata from crossref.org (if no title is set)]"
+        },
+        "publication_type",
+        {
+          "id": "published",
+          "title": "published: when was the earliest version of record available? (date, or year-month, or year)"
+        },
+        {
+          "id": "license",
+          "title": "License for open access publications"
+        }
+      ]
+    },
+    {
+      "title": "Details",
+      "fields": [
+        {
+          "id": "journal",
+          "fields": [
+            "!id",
+            "!np_series",
+            "!series",
+            "!series_no"
+          ],
+          "condition": "publication_type != 'book' && publication_type != 'map' && publication_type != 'poster' && publication_type != 'abstract'"
+        },
+        {
+          "id": "conference",
+          "condition": "publication_type == 'poster' || publication_type == 'abstract'"
+        },
+        {
+          "id": "publication_lang",
+          "title": "language of the publication"
+        },
+        "volume",
+        "issue",
+        {
+          "id": "art_no",
+          "title": "article no"
+        },
+        {
+          "id": "suppl",
+          "title": "supplement"
+        },
+        {
+          "id": "page_count",
+          "title": "total number of pages"
+        },
+        {
+          "id": "pages",
+          "title": "OR from page to page"
+        },
+        "issn",
+        "isbn"
+      ]
+    },
+    {
+      "title": "People",
+      "fields": [
+        {
+          "id": "people",
+          "fields": [
+            "!id"
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Organisations",
+      "fields": [
+        "organisations"
+      ]
+    },
+    {
+      "title": "Texts",
+      "fields": [
+        {
+          "id": "abstract",
+          "items": {
+            "fields": [
+              {
+                "id": "@language",
+                "default": "en"
+              },
+              {
+                "id": "@value",
+                "type": "textarea"
+              }
+            ]
+          }
+        },
+        {
+          "id": "overview",
+          "items": {
+            "fields": [
+              {
+                "id": "@language",
+                "default": "nb"
+              },
+              {
+                "id": "@value",
+                "type": "textarea"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": "Classification",
+      "fields": [
+        {
+          "id": "topics",
+          "title": "topics: for integrating with http://npolar.no",
+          "type": "array"
+        },
+        {
+          "id": "programme",
+          "title": "programmes/sections: which programmes/sections were involved in producing the publication?"
+        },
+        {
+          "id": "research_stations",
+          "title": "resarch stations: used for reporting"
+        },
+        {
+          "id": "locations",
+          "items": {
+            "fields": [
+              "placename",
+              "area",
+              "!country",
+              "!hemisphere",
+              "!latitude"
+            ]
+          }
+        },
+        {
+          "id": "tags",
+          "title": "tags: any keyword, but no need to repeat words already in the text"
+        },
+        "draft",
+        "state",
+        {
+          "id": "comment",
+          "type": "textarea"
+        }
+      ]
+    },
+    {
+      "title": "Links",
+      "fields": [
+        {
+          "id": "links",
+          "fields": [
+            {
+              "id": "rel",
+              "enum": [
+                "a",
+                "b"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "title": "Files",
+      "fields": [
+        "files"
+      ]
+    }
+  ]
 }
