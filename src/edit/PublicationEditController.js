@@ -3,8 +3,6 @@
 // @todo search for data(!)
 // @todo check/remove unused deps (jshint setting)
 // @todo bottomSheetOptions => find NPOLAR people? lookup DOI?
-
-
 function PublicationEditController($scope, $controller, $http, $location,
   formula, formulaAutoCompleteService, fileFunnelService, npolarCountryService,
   npolarApiConfig, NpolarMessage, NpolarApiSecurity, NpolarLang,
@@ -17,8 +15,7 @@ function PublicationEditController($scope, $controller, $http, $location,
     return arr.filter((thing, index, self) => self.findIndex(t => t[p] === thing[p]) === index);
   };
 
-  const schema = 'https://api.npolar.no/schema/publication-1';
-  //const schema = 'edit/publication-1.json';
+  const schema = 'edit/publication-schema-1-fork.json';
 
   function init() {
 
@@ -40,15 +37,14 @@ function PublicationEditController($scope, $controller, $http, $location,
         code: 'nb_NO',
       }];*/
 
-    $scope.formula = formula.getInstance({
-      schema,
-      form: 'edit/formula.json',
-      language: NpolarLang.getLang(),
-      templates: npdcAppConfig.formula.templates.concat(templates)//,
-      //languages: npdcAppConfig.formula.languages.concat(i18n)
-    });
 
-
+      $scope.formula = formula.getInstance({
+        schema,
+        form: 'edit/formula.json',
+        language: NpolarLang.getLang(),
+        templates: npdcAppConfig.formula.templates.concat(templates)//,
+        //languages: npdcAppConfig.formula.languages.concat(i18n)
+      });
 
     formulaAutoCompleteService.autocomplete({
       match: "publication_lang",
